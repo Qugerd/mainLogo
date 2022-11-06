@@ -11,4 +11,5 @@
     <string name="l">L</string>
     <string name="m">M</string>
     <string name="add_to_card">Добавитьть в корзину</string>
+    <string name="description">Описание</string>
 </resources>
