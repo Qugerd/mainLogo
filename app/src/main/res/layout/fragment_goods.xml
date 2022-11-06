@@ -1,182 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        android:layout_height="400dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/adik"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
 
-    
-    <TextView
-        android:id="@+id/textViewBrend"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-
-        app:layout_constraintTop_toBottomOf="@id/imageView"
-        app:layout_constraintStart_toStartOf="parent"
-
-        android:textSize="20dp"
-        android:text="@string/brend"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        app:layout_constraintBottom_toBottomOf="@id/textViewBrend"
-        app:layout_constraintStart_toEndOf="@id/textViewBrend"
-        app:layout_constraintTop_toTopOf="@id/textViewBrend"
-
-        android:text="@string/category"
-        android:textSize="15dp" />
-
-    <TextView
-        android:id="@+id/textViewName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-
-        android:text="@string/product_name"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewBrend" />
-
-    <TextView
-        android:id="@+id/textViewPrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/price"
-
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewName" />
-
-    <TextView
-        android:id="@+id/textViewChooseColor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_margin="10dp"
-        android:text="@string/color"
-        android:textColor="@color/black"
+            android:layout_height="400dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/adik"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-        android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewPrice" />
+        <TextView
+            android:id="@+id/textViewBrend"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroupChooseColor"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/textViewChooseColor"
-        android:layout_margin="10dp">
+            app:layout_constraintTop_toBottomOf="@id/imageView"
+            app:layout_constraintStart_toStartOf="parent"
 
-        <com.google.android.material.chip.Chip
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:textSize="20dp"
+            android:text="@string/brend"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
-            app:chipBackgroundColor="@color/black"
-            app:chipCornerRadius="20dp"/>
-
-        <com.google.android.material.chip.Chip
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-
-            app:chipBackgroundColor="@color/red"
-            app:chipCornerRadius="20dp"/>
-        <com.google.android.material.chip.Chip
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-
-            app:chipBackgroundColor="@color/yellow"
-            app:chipCornerRadius="20dp"/>
-        <com.google.android.material.chip.Chip
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-
-            app:chipBackgroundColor="@color/purple_200"
-            app:chipCornerRadius="20dp"/>
-    </com.google.android.material.chip.ChipGroup>
-
-    <TextView
-        android:id="@+id/textViewChooseSize"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_margin="10dp"
-        android:text="@string/table_size"
-
-
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/chipGroupChooseColor" />
-
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroupChooseSize"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-
-        android:layout_margin="10dp"
-        app:layout_constraintTop_toBottomOf="@id/textViewChooseSize"
-        tools:layout_editor_absoluteX="10dp">
-
-        <com.google.android.material.chip.Chip
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/xs" />
+            android:layout_marginStart="30dp"
+            app:layout_constraintBottom_toBottomOf="@id/textViewBrend"
+            app:layout_constraintStart_toEndOf="@id/textViewBrend"
+            app:layout_constraintTop_toTopOf="@id/textViewBrend"
 
-        <com.google.android.material.chip.Chip
-            android:layout_width="wrap_content"
+            android:text="@string/category"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+
+            android:text="@string/product_name"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewBrend" />
+
+        <TextView
+            android:id="@+id/textViewPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/price"
+
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewName" />
+
+        <TextView
+            android:id="@+id/textViewChooseColor"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:text="@string/xl" />
+            android:layout_margin="10dp"
+            android:text="@string/color"
+            android:textColor="@color/black"
 
-        <com.google.android.material.chip.Chip
-            android:layout_width="wrap_content"
+
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewPrice" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupChooseColor"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            app:chipSpacingHorizontal="0dp"
+            app:layout_constraintTop_toBottomOf="@id/textViewChooseColor"
+            tools:layout_editor_absoluteX="10dp">
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+
+                app:chipBackgroundColor="@color/black"
+                app:chipCornerRadius="20dp" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+
+                app:chipBackgroundColor="@color/red"
+                app:chipCornerRadius="20dp" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+
+                app:chipBackgroundColor="@color/yellow"
+                app:chipCornerRadius="20dp" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                
+                app:chipBackgroundColor="@color/purple_200"
+                app:chipCornerRadius="20dp" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/textViewChooseSize"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:text="@string/l" />
+            android:layout_margin="10dp"
+            android:text="@string/table_size"
 
-        <com.google.android.material.chip.Chip
-            android:layout_width="wrap_content"
+
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chipGroupChooseColor" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupChooseSize"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:chipSpacingHorizontal="0dp"
+            android:layout_margin="10dp"
+            app:layout_constraintTop_toBottomOf="@id/textViewChooseSize"
+            tools:layout_editor_absoluteX="10dp">
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/xs" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/xl" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/l" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/m" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <Button
+            android:id="@+id/buttonAddToCard"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/chipGroupChooseSize"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="30dp"
 
-            android:text="@string/m" />
-    </com.google.android.material.chip.ChipGroup>
+            android:text="@string/add_to_card"/>
 
-    <Button
-        android:id="@+id/buttonAddToCard"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/chipGroupChooseSize"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="30dp"
+        <TextView
+            android:id="@+id/textViewDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/buttonAddToCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="10dp"
 
-        android:text="@string/add_to_card"/>
+            android:textSize="30dp"
+            android:text="@string/description"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewDescriptionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textViewDescription"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="10dp"
+
+            tools:text="@tools:sample/lorem/random"
+            android:textColor="@color/black"/>
 
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
