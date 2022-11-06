@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Logo</string>
+    <string name="product_name">Название товара</string>
+    <string name="price">3890 Р</string>
+    <string name="brend">Бренд</string>
+    <string name="category">Категория</string>
+    <string name="color">Выбор цвета</string>
+    <string name="table_size">Таблица размеров</string>
+    <string name="xs">XS</string>
+    <string name="xl">XL</string>
+    <string name="l">L</string>
+    <string name="m">M</string>
+    <string name="add_to_card">Добавитьть в корзину</string>
+</resources>
