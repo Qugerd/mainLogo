@@ -10,5 +10,6 @@
     <color name="red">#FF0000</color>
     <color name="yellow">#FFEB3B</color>
     <color name="blue">#0384F4</color>
+    <color name="splash">#6300897B</color>
 
 </resources>
