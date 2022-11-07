@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Logo</string>
+    <string name="app_name">logo</string>
     <string name="product_name">Название товара</string>
     <string name="price">3890 Р</string>
     <string name="brend">Бренд</string>
