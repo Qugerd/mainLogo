@@ -265,8 +265,44 @@
                 android:text="@string/new_clothes"
                 android:textSize="36dp"
                 android:fontFamily="@font/pt_root_bold"
-                android:textColor="@color/semi_black"
-                />
+                android:textColor="@color/semi_black" />
+
+            <ScrollView
+                android:id="@+id/scrollViewNewCollection"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@color/grey_2"
+                android:layout_marginTop="15dp"
+
+                app:layout_constraintTop_toBottomOf="@id/textViewNew"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/textViewSales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/scrollViewNewCollection"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="50dp"
+
+                android:text="@string/sales"
+                android:textSize="36dp"
+                android:fontFamily="@font/pt_root_bold"
+                android:textColor="@color/semi_black" />
+
+            <ScrollView
+                android:id="@+id/scrollViewNewSales"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@color/grey_2"
+                android:layout_marginTop="15dp"
+
+                app:layout_constraintTop_toBottomOf="@id/textViewSales"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
