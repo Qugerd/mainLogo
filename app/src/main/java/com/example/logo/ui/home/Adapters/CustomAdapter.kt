@@ -1,14 +1,10 @@
 package com.example.logo.ui.home.Adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.logo.R
-import com.example.logo.databinding.CardViewDesignBinding
+import com.example.logo.ui.home.ItemsViewModel
 
 class CustomAdapter(private val mList: List<ItemsViewModel>)
     :Adapter<CustomViewHolder>() {

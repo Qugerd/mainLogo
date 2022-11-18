@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.logo.R
 import com.example.logo.databinding.FragmentHomeBinding
 import com.example.logo.ui.home.Adapters.CustomAdapter
-import com.example.logo.ui.home.Adapters.ItemsViewModel
 
 class HomeFragment:Fragment() {
 
