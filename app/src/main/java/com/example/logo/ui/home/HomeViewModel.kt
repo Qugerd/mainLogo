@@ -9,7 +9,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class HomeViewModel: ViewModel() {
-    val apiInterface = ApiInterface.create().getMovies()
+//    val apiInterface = ApiInterface.create().getMovies()
 
 
 

@@ -1,14 +1,19 @@
 package com.example.logo.data
 
+import com.example.logo.Categor
 import com.example.logo.data.model.ProductList
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 interface ApiInterface {
+    @GET("api/catalog/product/list")
+    fun getProductList() : Call<ProductList>
+
     @GET("api/categories/list")
-    fun getMovies() : Call<ProductList>
+    fun getCatecoriesList() : Call<Categor>
 
     companion object {
 
