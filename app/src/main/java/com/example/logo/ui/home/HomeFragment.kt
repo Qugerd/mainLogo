@@ -33,13 +33,7 @@ class HomeFragment:Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val data = ArrayList<ItemsViewModel>()
-//        for (i in 1..20) {
-//            data.add(ItemsViewModel(R.drawable.home, "Item " + i))
-//        }
-
         with(binding.recyclerViewNewCollection){
-//            adapter = CustomAdapter(data)
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
 
@@ -53,6 +47,7 @@ class HomeFragment:Fragment() {
                 Log.d("test", "Результат ${response?.body()}")
 
                 recycleViewNewCollection.adapter = CustomAdapter(response?.body()?.data)
+
             }
 
             override fun onFailure(call: Call<ProductList>?, t: Throwable?) {

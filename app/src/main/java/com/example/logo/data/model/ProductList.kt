@@ -4,17 +4,17 @@ import com.google.gson.annotations.SerializedName
 
 data class ProductList(
     @SerializedName("data")
-    val data: ArrayList<Data> = arrayListOf(),
+    val data: List<Data>,
 
     @SerializedName("links")
-    val links: Links? = null,
+    val links: Links,
 
     @SerializedName("meta")
-    val meta: Meta? = null,
+    val meta: Meta,
 
     @SerializedName("filters")
-    val filters: ArrayList<Filter> = arrayListOf(),
+    val filters: List<Filter>,
 
     @SerializedName("category")
-    val category: ArrayList<Category> = arrayListOf()
+    val category: List<Category>
 )
