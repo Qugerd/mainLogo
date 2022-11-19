@@ -4,9 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.logo.R
-import com.example.logo.ui.home.ItemsViewModel
+import com.example.logo.data.model.Category
+import com.example.logo.data.model.Data
 
-class CustomAdapter(private val mList: List<ItemsViewModel>)
+class CustomAdapter(private val data: List<Data>?)
     :Adapter<CustomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -21,14 +22,14 @@ class CustomAdapter(private val mList: List<ItemsViewModel>)
     // binds the list items to a view
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
 
-        val ItemsViewModel = mList[position]
-        holder.imageView.setImageResource(ItemsViewModel.image)
-        holder.textView.text = ItemsViewModel.text
+        val ItemsViewModel = data?.get(position)
+//        holder.imageView.setImageResource(ItemsViewModel.image)
+        holder.textView.text = ItemsViewModel?.name
 
     }
 
     // return the number of the items in the list
     override fun getItemCount(): Int {
-        return mList.size
+        return data!!.size
     }
 }
