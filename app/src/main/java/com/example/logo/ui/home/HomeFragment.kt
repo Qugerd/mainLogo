@@ -35,7 +35,7 @@ class HomeFragment:Fragment() {
 
 
         viewModelHome.productListLiveData.observe(viewLifecycleOwner) {
-            Log.d("test", "observer ${it}")
+            Log.d("test", "Data: ${it.data}")
             recycleViewNewCollection.adapter = CustomAdapter(it.data)
         }
 
