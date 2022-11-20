@@ -7,19 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.logo.api.ApiInterface
-import com.example.logo.data.modelProductList.ProductList
 import com.example.logo.databinding.FragmentHomeBinding
 import com.example.logo.ui.home.Adapters.CustomAdapter
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class HomeFragment:Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    private var viewModelHome: HomeViewModel = HomeViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,25 +29,16 @@ class HomeFragment:Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(binding.recyclerViewNewCollection){
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        val recycleViewNewCollection = binding.recyclerViewNewCollection
+        recycleViewNewCollection.layoutManager = LinearLayoutManager(requireContext(),
+            LinearLayoutManager.HORIZONTAL, false)
+
+
+        viewModelHome.productListLiveData.observe(viewLifecycleOwner) {
+            Log.d("test", "observer ${it}")
+            recycleViewNewCollection.adapter = CustomAdapter(it.data)
         }
 
-        val recycleViewNewCollection = binding.recyclerViewNewCollection
-
-
-        val apiInterface = ApiInterface.create().getProductList()
-
-        apiInterface.enqueue( object : Callback<ProductList> {
-            override fun onResponse(call: Call<ProductList>?, response: Response<ProductList>?) {
-                Log.d("test", "Результат ${response?.body()}")
-
-                recycleViewNewCollection.adapter = CustomAdapter(response?.body()?.data)
-            }
-
-            override fun onFailure(call: Call<ProductList>?, t: Throwable?) {
-                Log.d("test", "Не получилось${t?.message}")
-            }
-        })
+        viewModelHome.getProductList()
     }
 }
