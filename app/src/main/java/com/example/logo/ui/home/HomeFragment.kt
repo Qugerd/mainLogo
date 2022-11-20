@@ -44,7 +44,7 @@ class HomeFragment:Fragment() {
 
         apiInterface.enqueue( object : Callback<ProductList> {
             override fun onResponse(call: Call<ProductList>?, response: Response<ProductList>?) {
-                Log.d("test", "Результат ${response?.body()?.category}")
+                Log.d("test", "Результат ${response?.body()}")
 
                 recycleViewNewCollection.adapter = CustomAdapter(response?.body()?.data)
             }
