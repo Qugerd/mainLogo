@@ -4,8 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.logo.R
-import com.example.logo.data.model.Category
-import com.example.logo.data.model.Data
+import com.example.logo.data.modelProductList.Data
 
 class CustomAdapter(private val data: List<Data>?)
     :Adapter<CustomViewHolder>() {
