@@ -1,5 +1,6 @@
-package com.example.logo.data
+package com.example.logo.api
 
+import com.example.logo.data.Categor
 import com.example.logo.data.model.ProductList
 import retrofit2.Call
 import retrofit2.Retrofit
