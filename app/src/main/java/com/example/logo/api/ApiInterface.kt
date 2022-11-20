@@ -1,7 +1,7 @@
 package com.example.logo.api
 
-import com.example.logo.data.Categor
-import com.example.logo.data.model.ProductList
+import com.example.logo.data.modelCategoryList.Categor
+import com.example.logo.data.modelProductList.ProductList
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

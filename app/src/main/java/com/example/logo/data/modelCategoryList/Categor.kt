@@ -1,6 +1,5 @@
-package com.example.logo.data
+package com.example.logo.data.modelCategoryList
 
-import com.example.logo.data.Data
 import com.google.gson.annotations.SerializedName
 
 data class Categor(

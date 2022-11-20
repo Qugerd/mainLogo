@@ -1,4 +1,4 @@
-package com.example.logo.data.model
+package com.example.logo.data.modelProductList
 
 import com.google.gson.annotations.SerializedName
 
