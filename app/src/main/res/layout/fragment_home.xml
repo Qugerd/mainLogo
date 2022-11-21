@@ -26,16 +26,16 @@
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewLogo"
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="10dp"
-
-        android:queryHint="@string/search"
         android:background="@drawable/seach_view_background"
+        android:iconifiedByDefault="true"
         android:inputType="text"
-        android:iconifiedByDefault="false"/>
+
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewLogo"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -267,12 +267,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/frameHomeWear" />
 
-            <ScrollView
-                android:id="@+id/scrollViewNewCollection"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewNewCollection"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:background="@color/grey_2"
+                android:layout_marginHorizontal="10dp"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -290,18 +290,26 @@
                 android:textSize="36dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/scrollViewNewCollection" />
+                app:layout_constraintTop_toBottomOf="@id/recyclerViewNewCollection" />
 
-            <ScrollView
-                android:id="@+id/scrollViewNewSales"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewSales"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:background="@color/grey_2"
+                android:layout_marginHorizontal="10dp"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewSales" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                app:layout_constraintTop_toBottomOf="@id/recyclerViewSales"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="20dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
