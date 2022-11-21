@@ -10,17 +10,23 @@ import com.example.logo.R
 import com.example.logo.data.modelProductList.Data
 import com.example.logo.databinding.ItemNewClothesBinding
 
-class NewClothesAdapter(private val data: List<Data>?)
+class NewClothesAdapter(private val data: List<Data>?, val listener: Listener)
     :Adapter<NewClothesAdapter.NewClothesViewHolder>() {
 
     class NewClothesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val binding = ItemNewClothesBinding.bind(itemView)
 
+        fun bind(listener: Listener) = with(binding){
+            itemView.setOnClickListener {
+                listener.onClick()
+            }
+        }
+
         var tvName = binding.textViewName
         var tvPrice = binding.textViewPrice
-//        var tvLabelNew = binding.textViewLabelNew
         var ivNewClothes = binding.imageViewNewClothes
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewClothesViewHolder {
@@ -38,6 +44,7 @@ class NewClothesAdapter(private val data: List<Data>?)
         val itemsViewModel = data?.get(position)
         val i = itemsViewModel!!.images
 
+        holder.bind(listener)
         holder.tvName.text = itemsViewModel?.name
         holder.tvPrice.text = itemsViewModel?.price + " ₽"
 
@@ -49,6 +56,10 @@ class NewClothesAdapter(private val data: List<Data>?)
                 .into(holder.ivNewClothes)
         }
         else holder.ivNewClothes.setImageResource(R.drawable.new_clothes)
+    }
+
+    interface Listener{
+        fun onClick()
     }
 
     override fun getItemCount(): Int {

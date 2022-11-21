@@ -11,7 +11,7 @@ import com.example.logo.databinding.FragmentHomeBinding
 import com.example.logo.ui.home.adapters.NewClothesAdapter
 import com.example.logo.ui.home.adapters.SalesAdapter
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), NewClothesAdapter.Listener {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -41,10 +41,14 @@ class HomeFragment : Fragment() {
 
         viewModelHome.productListLiveData.observe(viewLifecycleOwner) {
             Log.d("test", "Data: ${it.data}")
-            recycleViewNewCollection.adapter = NewClothesAdapter(it.data)
+            recycleViewNewCollection.adapter = NewClothesAdapter(it.data, this)
             recycleViewSales.adapter = SalesAdapter(it.data)
         }
 
         viewModelHome.getProductList()
+    }
+
+    override fun onClick() {
+        Log.d("test", "click")
     }
 }
