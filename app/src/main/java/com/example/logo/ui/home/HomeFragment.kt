@@ -9,8 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.logo.databinding.FragmentHomeBinding
 import com.example.logo.ui.home.adapters.NewClothesAdapter
+import com.example.logo.ui.home.adapters.SalesAdapter
 
-class HomeFragment:Fragment() {
+class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -33,10 +34,15 @@ class HomeFragment:Fragment() {
         recycleViewNewCollection.layoutManager = LinearLayoutManager(requireContext(),
             LinearLayoutManager.HORIZONTAL, false)
 
+        val recycleViewSales = binding.recyclerViewSales
+        recycleViewSales.layoutManager = LinearLayoutManager(requireContext(),
+            LinearLayoutManager.HORIZONTAL, false)
+
 
         viewModelHome.productListLiveData.observe(viewLifecycleOwner) {
             Log.d("test", "Data: ${it.data}")
             recycleViewNewCollection.adapter = NewClothesAdapter(it.data)
+            recycleViewSales.adapter = SalesAdapter(it.data)
         }
 
         viewModelHome.getProductList()
