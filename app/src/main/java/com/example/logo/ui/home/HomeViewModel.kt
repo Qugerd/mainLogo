@@ -24,7 +24,7 @@ class HomeViewModel(): ViewModel(){
             val response = withContext(Dispatchers.IO) {
                 dataRepository.getProductList()
             }
-            Log.d("test", "Response: ${response}" )
+
             _productListLiveData.postValue(response)
         }
     }
