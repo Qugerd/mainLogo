@@ -10,7 +10,7 @@ import com.example.logo.R
 import com.example.logo.data.modelProductList.Data
 import com.example.logo.databinding.ItemNewClothesBinding
 
-class NewClothesAdapter(private val data: List<Data>?, val listener: Listener)
+class NewClothesAdapter(private val data: List<Data>?, private val listener: Listener)
     :Adapter<NewClothesAdapter.NewClothesViewHolder>() {
 
     class NewClothesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
