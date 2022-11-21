@@ -25,5 +25,10 @@
         android:name="com.example.logo.ui.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/goodsFragment"
+        android:name="com.example.logo.ui.goods.GoodsFragment"
+        android:label="fragment_goods"
+        tools:layout="@layout/fragment_goods" />
 
 </navigation>
