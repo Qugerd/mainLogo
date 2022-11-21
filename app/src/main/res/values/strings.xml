@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Logo</string>
+    <string name="app_name">logo</string>
     <string name="product_name">Название товара</string>
     <string name="price">3890 Р</string>
     <string name="brend">Бренд</string>
@@ -17,4 +17,15 @@
     <string name="profile">Профиль</string>
     <string name="favorite">Избранное</string>
     <string name="card">Корзина</string>
+    <string name="search">Поиск</string>
+    <string name="costumes">Костюмы</string>
+    <string name="coat">Пальто</string>
+    <string name="shoes">Обувь</string>
+    <string name="jacket">Жакеты и пиджаки</string>
+    <string name="trikotaj">Трикотаж</string>
+    <string name="swim_suit">Купальники</string>
+    <string name="home_wear">Домашняя одежда</string>
+    <string name="marina">Marina Rinaldi</string>
+    <string name="new_clothes">Новые поступления</string>
+    <string name="sales">Скидки</string>
 </resources>
