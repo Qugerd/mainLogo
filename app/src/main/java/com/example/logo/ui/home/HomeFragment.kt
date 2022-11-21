@@ -6,12 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.logo.Navigator
+import com.example.logo.R
 import com.example.logo.databinding.FragmentHomeBinding
+import com.example.logo.navigator
 import com.example.logo.ui.home.adapters.NewClothesAdapter
 import com.example.logo.ui.home.adapters.SalesAdapter
 
-class HomeFragment : Fragment(), NewClothesAdapter.Listener {
+class HomeFragment : Fragment(), NewClothesAdapter.Listener{
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -50,5 +55,7 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener {
 
     override fun onClick() {
         Log.d("test", "click")
+        navigator().showGoodFragment()
+
     }
 }

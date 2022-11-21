@@ -31,4 +31,12 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph" />
 
+<!--    <androidx.fragment.app.FragmentContainerView-->
+<!--        android:id="@+id/fragmentContainer"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/nav_view"/>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
