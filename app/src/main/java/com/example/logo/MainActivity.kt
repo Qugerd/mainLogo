@@ -18,7 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.net.HttpURLConnection
 import java.net.URL
 
-class MainActivity : AppCompatActivity(), Navigator {
+class MainActivity : AppCompatActivity(){
 
     private lateinit var binding: ActivityMainBinding
 
@@ -39,19 +39,5 @@ class MainActivity : AppCompatActivity(), Navigator {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         supportActionBar!!.hide()
-    }
-
-    override fun showGoodFragment() {
-//        findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeFragment_to_goodsFragment)
-    }
-
-    private fun launchFragment() {
-//        findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeFragment_to_goodsFragment)
-//        supportFragmentManager
-//            .beginTransaction()
-//            .addToBackStack(null)
-//            .replace(R.id.nav_host_fragment, fragment)
-//            .commit()
-
     }
 }

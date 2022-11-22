@@ -28,4 +28,23 @@ class HomeViewModel(): ViewModel(){
             _productListLiveData.postValue(response)
         }
     }
+
+    fun getProductDetails() {
+        viewModelScope.launch {
+            val response = withContext(Dispatchers.IO) {
+                dataRepository.getProductDetails()
+            }
+            Log.d("test", "О продукте: ${response}")
+
+        }
+    }
+
+    fun getCategoryList() {
+        viewModelScope.launch {
+            val response = withContext(Dispatchers.IO) {
+                dataRepository.getCategoryList()
+            }
+            Log.d("test", "Категория: ${response}")
+        }
+    }
 }

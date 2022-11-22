@@ -47,12 +47,15 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
 
 
         viewModelHome.productListLiveData.observe(viewLifecycleOwner) {
-            Log.d("test", "Data: ${it.data}")
             recycleViewNewCollection.adapter = NewClothesAdapter(it.data, this)
             recycleViewSales.adapter = SalesAdapter(it.data)
         }
 
-        viewModelHome.getProductList()
+        with(viewModelHome){
+            getProductList()
+            getCategoryList()
+            getProductDetails()
+        }
     }
 
     override fun onClick() {
