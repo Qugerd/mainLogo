@@ -17,9 +17,12 @@ class NewClothesAdapter(private val data: List<Data>?, private val listener: Lis
 
         private val binding = ItemNewClothesBinding.bind(itemView)
 
-        fun bind(listener: Listener) = with(binding){
+
+        fun bind(listener: Listener, data: List<Data>?) = with(binding){
             itemView.setOnClickListener {
-                listener.onClick()
+                listener.onItemClick(
+                    data?.get(position)?.slug
+                )
             }
         }
 
@@ -44,7 +47,7 @@ class NewClothesAdapter(private val data: List<Data>?, private val listener: Lis
         val itemsViewModel = data?.get(position)
         val i = itemsViewModel!!.images
 
-        holder.bind(listener)
+        holder.bind(listener, data)
         holder.tvName.text = itemsViewModel?.name
         holder.tvPrice.text = itemsViewModel?.price + " ₽"
 
@@ -59,7 +62,7 @@ class NewClothesAdapter(private val data: List<Data>?, private val listener: Lis
     }
 
     interface Listener{
-        fun onClick()
+        fun onItemClick(position: String?)
     }
 
     override fun getItemCount(): Int {

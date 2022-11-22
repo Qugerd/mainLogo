@@ -12,8 +12,8 @@ class DataRepository(private val apiGetFunction: ApiGetFunction) {
         return apiGetFunction.getProductList()
     }
 
-    suspend fun getProductDetails() : ProductDetails {
-        return apiGetFunction.getProductDetails("aut")
+    suspend fun getProductDetails(slug: String) : ProductDetails {
+        return apiGetFunction.getProductDetails(slug)
     }
 
     suspend fun getCategoryList() : Categor{

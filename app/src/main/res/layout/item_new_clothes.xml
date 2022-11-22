@@ -1,69 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginEnd="15dp"
-    android:background="@color/splash">
+    app:cardCornerRadius="15dp"
+    android:layout_marginEnd="15dp">
 
-    <ImageView
-        android:id="@+id/imageViewNewClothes"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:scaleType="fitStart"
-        android:src="@drawable/new_clothes"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginHorizontal="5dp"
-        android:layout_marginTop="5dp"/>
-
-    <TextView
-        android:id="@+id/textViewName"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="15dp"
-        android:text="Название одежды вот такой длины"
-        android:textColor="@color/black"
-        android:textSize="18dp"
-        android:textAllCaps="true"
+        android:background="@drawable/gradient">
 
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageViewNewClothes" />
 
-    <TextView
-        android:id="@+id/textViewPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="15dp"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imageViewNewClothes2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:cardCornerRadius="20dp"
+            android:background="@color/splash"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="5dp">
+            <ImageView
+                android:id="@+id/imageViewNewClothes"
+                android:layout_width="190dp"
+                android:layout_height="190dp"
+                android:scaleType="fitStart"
+                android:src="@drawable/new_clothes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-        android:text="1 789₽"
-        android:textColor="@color/black"
+            <TextView
+                android:id="@+id/textViewLabelNew"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
 
-        android:textSize="24dp"
-        android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:background="#FF0000"
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewName" />
+                android:fontFamily="@font/pt_root_bold"
 
-    <TextView
-        android:id="@+id/textViewLabelNew"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
+                android:gravity="center"
+                android:text="NEW"
+                android:textSize="24dp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.cardview.widget.CardView>
 
-        android:layout_marginTop="16dp"
-        android:background="#FF0000"
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
+            android:text="Название одежды вот такой длины"
+            android:textColor="@color/black"
+            android:textSize="18dp"
 
-        android:fontFamily="@font/pt_root_bold"
 
-        android:gravity="center"
-        android:text="NEW"
-        android:textSize="24dp"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/imageViewNewClothes"
-        app:layout_constraintTop_toTopOf="@+id/imageViewNewClothes" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageViewNewClothes2" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/textViewPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="15dp"
+
+            android:text="1 789₽"
+            android:textColor="@color/black"
+
+            android:textSize="20dp"
+            android:textStyle="bold"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewName" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

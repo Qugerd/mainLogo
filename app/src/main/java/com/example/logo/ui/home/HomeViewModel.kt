@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.logo.api.RetrofitInstance
+import com.example.logo.data.modelProductDetails.Data
+import com.example.logo.data.modelProductDetails.ProductDetails
 import com.example.logo.data.modelProductList.ProductList
 import com.example.logo.source.DataRepository
 import kotlinx.coroutines.Dispatchers
@@ -19,6 +21,9 @@ class HomeViewModel(): ViewModel(){
     private val _productListLiveData = MutableLiveData<ProductList>()
     val productListLiveData: LiveData<ProductList> = _productListLiveData
 
+    private val _productDetailsLiveData = MutableLiveData<Data>()
+    val productDetailsLiveData: LiveData<Data> = _productDetailsLiveData
+
     fun getProductList() {
         viewModelScope.launch {
             val response = withContext(Dispatchers.IO) {
@@ -29,13 +34,13 @@ class HomeViewModel(): ViewModel(){
         }
     }
 
-    fun getProductDetails() {
+    fun getProductDetails(slug: String) {
         viewModelScope.launch {
             val response = withContext(Dispatchers.IO) {
-                dataRepository.getProductDetails()
+                dataRepository.getProductDetails(slug)
             }
-            Log.d("test", "О продукте: ${response}")
-
+            Log.d("test", "О продукте: ${response.data}")
+            _productDetailsLiveData.postValue(response.data)
         }
     }
 
