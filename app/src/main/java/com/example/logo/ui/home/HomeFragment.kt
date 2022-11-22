@@ -5,9 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.logo.Navigator
 import com.example.logo.R
@@ -55,7 +57,7 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
 
     override fun onClick() {
         Log.d("test", "click")
-        navigator().showGoodFragment()
-
+//        navigator().showGoodFragment()
+        findNavController().navigate(R.id.action_homeFragment_to_goodsFragment)
     }
 }

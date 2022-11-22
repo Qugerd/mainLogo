@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.logo.databinding.ActivityMainBinding
@@ -40,11 +42,11 @@ class MainActivity : AppCompatActivity(), Navigator {
     }
 
     override fun showGoodFragment() {
-        launchFragment(GoodsFragment())
+//        findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeFragment_to_goodsFragment)
     }
 
-    private fun launchFragment(fragment: Fragment) {
-        findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeFragment_to_goodsFragment)
+    private fun launchFragment() {
+//        findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeFragment_to_goodsFragment)
 //        supportFragmentManager
 //            .beginTransaction()
 //            .addToBackStack(null)
