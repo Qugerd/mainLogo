@@ -58,7 +58,7 @@ class NewClothesAdapter(private val data: List<Data>?, private val listener: Lis
                 .load(BASE_URL + i.get(0).path)
                 .into(holder.ivNewClothes)
         }
-        else holder.ivNewClothes.setImageResource(R.drawable.new_clothes)
+        else holder.ivNewClothes.setImageResource(R.drawable.jesus)
     }
 
     interface Listener{

@@ -6,10 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
@@ -54,40 +56,26 @@ class GoodsFragment: Fragment() {
                 textViewName.text = it.name
                 textViewPrice.text = it.price
                 textViewDescriptionText.text = it.description
-                progressBar.visibility = View.VISIBLE
-                if (it.images.isNotEmpty())
-                {
+                if (it.images.isNotEmpty()) {
+
                     Glide.with(binding.imageView)
                         .load(BASE_URL + it.images.get(0).path)
-                        .listener(object: RequestListener<Drawable>{
-                            override fun onLoadFailed(
-                                e: GlideException?,
-                                model: Any?,
-                                target: Target<Drawable>?,
-                                isFirstResource: Boolean
-                            ): Boolean {
-                                binding.progressBar.visibility = View.GONE
-                                return false
-                            }
-
-                            override fun onResourceReady(
-                                resource: Drawable?,
-                                model: Any?,
-                                target: Target<Drawable>?,
-                                dataSource: DataSource?,
-                                isFirstResource: Boolean
-                            ): Boolean {
-                                binding.progressBar.visibility = View.GONE
-                                return true
-                            }
-                        })
                         .into(binding.imageView)
                 }
-                else binding.imageView.setImageResource(R.drawable.adik)
+                else binding.imageView.setImageResource(R.drawable.jesus)
+                buttonAddToCard.setOnClickListener {
+                    onClick()
+                }
             }
+
        }
 
 
 
+    }
+
+    fun onClick()
+    {
+        Toast.makeText(requireContext(), "Добавлено в карзину", Toast.LENGTH_SHORT).show()
     }
 }

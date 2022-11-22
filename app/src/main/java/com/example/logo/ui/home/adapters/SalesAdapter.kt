@@ -44,7 +44,7 @@ class SalesAdapter(private val data: List<Data>?)
                 .load(BASE_URL + i.get(0).path)
                 .into(holder.ivNewClothes)
         }
-        else holder.ivNewClothes.setImageResource(R.drawable.new_clothes)
+        else holder.ivNewClothes.setImageResource(R.drawable.jesus)
     }
 
     override fun getItemCount(): Int {
