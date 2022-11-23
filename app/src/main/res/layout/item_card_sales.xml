@@ -75,13 +75,26 @@
             android:layout_marginTop="5dp"
             android:layout_marginStart="15dp"
 
-            android:text="1 789₽"
+            android:text="3223232323"
             android:textColor="@color/black"
-
-            android:textSize="20dp"
-            android:textStyle="bold"
+            android:textSize="16dp"
+            android:fontFamily="@font/pt_root_bold"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewName" />
+
+        <TextView
+            android:id="@+id/textViewNewPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+
+            android:text="22222"
+            android:textColor="#C53434"
+            android:textSize="18dp"
+
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewPrice" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

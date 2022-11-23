@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.bumptech.glide.Glide
 import com.example.logo.R
-import com.example.logo.data.modelProductList.Data
+import com.example.logo.data.modelProductList.DataProductList
 import com.example.logo.databinding.ItemNewClothesBinding
 
-class NewClothesAdapter(private val data: List<Data>?, private val listener: Listener)
+class NewClothesAdapter(private val data: List<DataProductList>?, private val listener: Listener)
     :Adapter<NewClothesAdapter.NewClothesViewHolder>() {
 
     class NewClothesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -18,7 +18,7 @@ class NewClothesAdapter(private val data: List<Data>?, private val listener: Lis
         private val binding = ItemNewClothesBinding.bind(itemView)
 
 
-        fun bind(listener: Listener, data: List<Data>?) = with(binding){
+        fun bind(listener: Listener, data: List<DataProductList>?) = with(binding){
             itemView.setOnClickListener {
                 listener.onItemClick(
                     data?.get(position)?.slug
@@ -50,7 +50,6 @@ class NewClothesAdapter(private val data: List<Data>?, private val listener: Lis
         holder.bind(listener, data)
         holder.tvName.text = itemsViewModel?.name
         holder.tvPrice.text = itemsViewModel?.price + " ₽"
-
 
         if (itemsViewModel.images.isNotEmpty())
         {

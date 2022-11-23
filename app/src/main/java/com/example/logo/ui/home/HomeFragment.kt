@@ -1,6 +1,7 @@
 package com.example.logo.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,13 +46,18 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
             LinearLayoutManager.HORIZONTAL, false)
 
 
-        viewModel.productListLiveData.observe(viewLifecycleOwner) {
+        viewModel.productListSalesData.observe(viewLifecycleOwner){
+            recycleViewSales.adapter = SalesAdapter(it, this)
+            Log.d("test", "Sales = ${it.size}")
+        }
+
+        viewModel.productListNewClothesData.observe(viewLifecycleOwner) {
             with(binding){
-                textViewCategory.text = it.category[0].name
+                // textViewCategory.text = it[0].slug
                 // TODO: Нужна картнка для категории  и добавить логику для второй категории
             }
-            recycleViewNewCollection.adapter = NewClothesAdapter(it.data, this)
-            recycleViewSales.adapter = SalesAdapter(it.data, this)
+            recycleViewNewCollection.adapter = NewClothesAdapter(it, this)
+            Log.d("test", "New = ${it.size}")
         }
 
         with(viewModel){

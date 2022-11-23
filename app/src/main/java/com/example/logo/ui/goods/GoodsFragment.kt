@@ -56,7 +56,11 @@ class GoodsFragment: Fragment() {
                 textViewName.text = it.name
                 textViewPrice.text = it.price
                 textViewDescriptionText.text = it.description
-                textViewLabelNew.visibility = View.VISIBLE
+                textViewLabelNew.apply {
+                    visibility = View.VISIBLE
+                    if (it.isSale) text = "Sale"
+
+                }
                 if (it.images.isNotEmpty()) {
 
                     Glide.with(binding.imageView)
