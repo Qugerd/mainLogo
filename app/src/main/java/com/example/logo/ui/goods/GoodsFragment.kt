@@ -59,7 +59,7 @@ class GoodsFragment: Fragment() {
                 textViewLabelNew.visibility = View.VISIBLE
                 if (it.images.isNotEmpty()) {
 
-                    val i = Glide.with(binding.imageView)
+                    Glide.with(binding.imageView)
                         .load(BASE_URL + it.images.get(0).path)
                         .into(binding.imageView)
                 }

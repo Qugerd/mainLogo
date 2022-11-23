@@ -9,8 +9,10 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.logo.R
 import com.example.logo.databinding.FragmentHomeBinding
+import com.example.logo.ui.goods.GoodsFragment
 import com.example.logo.ui.goods.GoodsFragment.Companion.KEY_NAME
 import com.example.logo.ui.home.adapters.NewClothesAdapter
 import com.example.logo.ui.home.adapters.SalesAdapter
@@ -44,6 +46,10 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
 
 
         viewModel.productListLiveData.observe(viewLifecycleOwner) {
+            with(binding){
+                textViewCategory.text = it.category[0].name
+                // TODO: Нужна картнка для категории  и добавить логику для второй категории
+            }
             recycleViewNewCollection.adapter = NewClothesAdapter(it.data, this)
             recycleViewSales.adapter = SalesAdapter(it.data, this)
         }
@@ -51,12 +57,14 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
         with(viewModel){
             getProductList()
             getCategoryList()
-//            getProductDetails()
+        }
+        
+        binding.cardViewFirst.setOnClickListener{
+            Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
         }
     }
 
     override fun onItemClick(position: String?) {
-        Toast.makeText(requireContext(), "click $position", Toast.LENGTH_SHORT).show()
         findNavController().navigate(
             R.id.action_homeFragment_to_goodsFragment,
             bundleOf(KEY_NAME to position)

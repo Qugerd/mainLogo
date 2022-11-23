@@ -21,10 +21,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:cardCornerRadius="20dp"
+            app:cardCornerRadius="15dp"
             android:background="@color/splash"
             android:layout_marginHorizontal="5dp"
             android:layout_marginTop="5dp">
+
             <ImageView
                 android:id="@+id/imageViewNewClothes"
                 android:layout_width="190dp"
