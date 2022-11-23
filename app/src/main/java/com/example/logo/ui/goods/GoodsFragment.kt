@@ -56,6 +56,7 @@ class GoodsFragment: Fragment() {
                 textViewName.text = it.name
                 textViewPrice.text = it.price
                 textViewDescriptionText.text = it.description
+                textViewLabelNew.visibility = View.VISIBLE
                 if (it.images.isNotEmpty()) {
 
                     Glide.with(binding.imageView)
@@ -63,8 +64,12 @@ class GoodsFragment: Fragment() {
                         .into(binding.imageView)
                 }
                 else binding.imageView.setImageResource(R.drawable.jesus)
+
                 buttonAddToCard.setOnClickListener {
-                    onClick()
+                    addToCart()
+                }
+                buttonBack.setOnClickListener {
+                    goBack()
                 }
             }
 
@@ -74,8 +79,12 @@ class GoodsFragment: Fragment() {
 
     }
 
-    fun onClick()
+    private fun addToCart()
     {
         Toast.makeText(requireContext(), "Добавлено в карзину", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun goBack(){
+        findNavController().popBackStack()
     }
 }
