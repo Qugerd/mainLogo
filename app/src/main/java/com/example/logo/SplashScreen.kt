@@ -27,4 +27,5 @@ class SplashScreen:AppCompatActivity(){
             200L
         )
     }
+    // TODO: Загрузочный экран сделать фрагментом
 }

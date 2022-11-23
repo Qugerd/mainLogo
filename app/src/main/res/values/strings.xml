@@ -28,4 +28,6 @@
     <string name="marina">Marina Rinaldi</string>
     <string name="new_clothes">Новые поступления</string>
     <string name="sales">Скидки</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

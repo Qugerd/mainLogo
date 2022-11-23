@@ -5,18 +5,25 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.example.logo.R
 import com.example.logo.databinding.FragmentHomeBinding
+import com.example.logo.ui.goods.GoodsFragment
+import com.example.logo.ui.goods.GoodsFragment.Companion.KEY_NAME
 import com.example.logo.ui.home.adapters.NewClothesAdapter
 import com.example.logo.ui.home.adapters.SalesAdapter
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), NewClothesAdapter.Listener{
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private var viewModelHome: HomeViewModel = HomeViewModel()
+    private var viewModel: HomeViewModel = HomeViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,12 +46,37 @@ class HomeFragment : Fragment() {
             LinearLayoutManager.HORIZONTAL, false)
 
 
-        viewModelHome.productListLiveData.observe(viewLifecycleOwner) {
-            Log.d("test", "Data: ${it.data}")
-            recycleViewNewCollection.adapter = NewClothesAdapter(it.data)
-            recycleViewSales.adapter = SalesAdapter(it.data)
+        viewModel.productListSalesData.observe(viewLifecycleOwner){
+            recycleViewSales.adapter = SalesAdapter(it, this)
+            Log.d("test", "Sales = ${it.size}")
         }
 
-        viewModelHome.getProductList()
+        viewModel.productListNewClothesData.observe(viewLifecycleOwner) {
+            with(binding){
+                // textViewCategory.text = it[0].slug
+                // TODO: Нужна картнка для категории  и добавить логику для второй категории
+            }
+            recycleViewNewCollection.adapter = NewClothesAdapter(it, this)
+            Log.d("test", "New = ${it.size}")
+        }
+
+        with(viewModel){
+            getProductList()
+            getCategoryList()
+        }
+        
+        binding.cardViewFirst.setOnClickListener{
+            Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_homeFragment_to_categoryFragment)
+        }
     }
+
+    override fun onItemClick(position: String?) {
+        findNavController().navigate(
+            R.id.action_homeFragment_to_goodsFragment,
+            bundleOf(KEY_NAME to position)
+        )
+    }
+
+    // TODO: сделать поиск, кнопки на превью с дабовлением в корзину
 }

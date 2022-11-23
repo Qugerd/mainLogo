@@ -4,12 +4,7 @@
 
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.logo.ui.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+    app:startDestination="@id/homeGraph">
     <fragment
         android:id="@+id/cardFragment"
         android:name="com.example.logo.ui.card.CardFragment"
@@ -25,5 +20,31 @@
         android:name="com.example.logo.ui.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <navigation
+        android:id="@+id/homeGraph"
+        app:startDestination="@id/homeFragment">
+        <fragment
+            android:id="@+id/homeFragment"
+            android:name="com.example.logo.ui.home.HomeFragment"
+            android:label="fragment_home"
+            tools:layout="@layout/fragment_home">
+            <action
+                android:id="@+id/action_homeFragment_to_goodsFragment"
+                app:destination="@id/goodsFragment" />
+            <action
+                android:id="@+id/action_homeFragment_to_categoryFragment"
+                app:destination="@id/categoryFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/goodsFragment"
+            android:name="com.example.logo.ui.goods.GoodsFragment"
+            android:label="fragment_goods"
+            tools:layout="@layout/fragment_goods" />
+        <fragment
+            android:id="@+id/categoryFragment"
+            android:name="com.example.logo.ui.category.CategoryFragment"
+            android:label="fragment_category"
+            tools:layout="@layout/fragment_category" />
+    </navigation>
 
 </navigation>
