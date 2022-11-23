@@ -31,12 +31,20 @@
             <action
                 android:id="@+id/action_homeFragment_to_goodsFragment"
                 app:destination="@id/goodsFragment" />
+            <action
+                android:id="@+id/action_homeFragment_to_categoryFragment"
+                app:destination="@id/categoryFragment" />
         </fragment>
         <fragment
             android:id="@+id/goodsFragment"
             android:name="com.example.logo.ui.goods.GoodsFragment"
             android:label="fragment_goods"
             tools:layout="@layout/fragment_goods" />
+        <fragment
+            android:id="@+id/categoryFragment"
+            android:name="com.example.logo.ui.category.CategoryFragment"
+            android:label="fragment_category"
+            tools:layout="@layout/fragment_category" />
     </navigation>
 
 </navigation>

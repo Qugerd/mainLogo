@@ -67,6 +67,7 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
         
         binding.cardViewFirst.setOnClickListener{
             Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_homeFragment_to_categoryFragment)
         }
     }
 
@@ -76,4 +77,6 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
             bundleOf(KEY_NAME to position)
         )
     }
+
+    // TODO: сделать поиск, кнопки на превью с дабовлением в корзину
 }
