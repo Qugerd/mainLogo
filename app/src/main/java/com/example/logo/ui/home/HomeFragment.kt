@@ -45,7 +45,7 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
 
         viewModel.productListLiveData.observe(viewLifecycleOwner) {
             recycleViewNewCollection.adapter = NewClothesAdapter(it.data, this)
-            recycleViewSales.adapter = SalesAdapter(it.data)
+            recycleViewSales.adapter = SalesAdapter(it.data, this)
         }
 
         with(viewModel){

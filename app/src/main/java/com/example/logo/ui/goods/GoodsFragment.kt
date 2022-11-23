@@ -59,7 +59,7 @@ class GoodsFragment: Fragment() {
                 textViewLabelNew.visibility = View.VISIBLE
                 if (it.images.isNotEmpty()) {
 
-                    Glide.with(binding.imageView)
+                    val i = Glide.with(binding.imageView)
                         .load(BASE_URL + it.images.get(0).path)
                         .into(binding.imageView)
                 }
@@ -71,6 +71,8 @@ class GoodsFragment: Fragment() {
                 buttonBack.setOnClickListener {
                     goBack()
                 }
+
+
             }
 
        }

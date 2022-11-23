@@ -10,11 +10,20 @@ import com.example.logo.R
 import com.example.logo.data.modelProductList.Data
 import com.example.logo.databinding.ItemCardSalesBinding
 
-class SalesAdapter(private val data: List<Data>?)
+class SalesAdapter(private val data: List<Data>?, private val listener: NewClothesAdapter.Listener)
     :Adapter<SalesAdapter.SalesViewHolder>() {
 
     class SalesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
         private val binding = ItemCardSalesBinding.bind(itemView)
+
+        fun bind(listener: NewClothesAdapter.Listener, data: List<Data>?) = with(binding){
+            itemView.setOnClickListener {
+                listener.onItemClick(
+                    data?.get(position)?.slug
+                )
+            }
+        }
 
         var tvName = binding.textViewName
         var tvPrice = binding.textViewPrice
@@ -29,11 +38,13 @@ class SalesAdapter(private val data: List<Data>?)
     }
 
     override fun onBindViewHolder(holder: SalesViewHolder, position: Int) {
+
         val BASE_URL = "http://10.0.2.2:80"
 
         val itemsViewModel = data?.get(position)
         val i = itemsViewModel!!.images
 
+        holder.bind(listener, data)
         holder.tvName.text = itemsViewModel?.name
         holder.tvPrice.text = itemsViewModel?.price + " ₽"
 
