@@ -23,7 +23,7 @@ class CategoryAdapter(private val data: List<DataProductList>)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_new_clothes, parent, false)
+            .inflate(R.layout.item_catalog, parent, false)
 
         return CategoryViewHolder(view)
     }
