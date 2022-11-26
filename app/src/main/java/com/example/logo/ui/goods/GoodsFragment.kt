@@ -52,7 +52,9 @@ class GoodsFragment: Fragment() {
         viewModel.getProductDetails(slug)
 
         viewModel.productDetailsLiveData.observe(viewLifecycleOwner){
+
             with(binding){
+
                 textViewBrend.text = it.slug
                 textCategory.text = it.category.name
                 textViewName.text = it.name
