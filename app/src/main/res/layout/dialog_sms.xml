@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bottom_sheet_corners">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:layout_marginTop="40dp"
+           android:layout_marginHorizontal="24dp">
+
+           <ImageButton
+               android:layout_width="16dp"
+               android:layout_height="16dp"
+
+               android:layout_gravity="start|center"
+
+               android:src="@drawable/ic_back"/>
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textColor="@color/black"
+               android:text="Введите код из SMS"
+               android:textSize="18dp"
+               android:textStyle="bold"
+
+               android:layout_marginStart="12dp"/>
+
+       </LinearLayout>
+
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+
+           android:layout_marginTop="16dp"
+           android:layout_marginHorizontal="24dp"
+
+
+           android:textColor="#706864"
+           android:text="Отправили сообщение на номер:
+
+                   +7 (000) 000-00-00"
+           android:textSize="16dp"/>
+
+       <com.google.android.material.textfield.TextInputLayout
+           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:padding="10dp"
+           android:hint="Код из SMS"
+
+           android:layout_marginTop="16dp"
+           android:layout_marginHorizontal="24dp"
+           >
+
+           <com.santalu.maskara.widget.MaskEditText
+               android:id="@+id/input"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+
+               android:inputType="number"
+               app:mask="____"
+               app:maskCharacter="_"
+               app:maskStyle="normal" />
+       </com.google.android.material.textfield.TextInputLayout>
+
+       <androidx.appcompat.widget.AppCompatButton
+           android:id="@+id/btnGetCode"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+
+           android:layout_marginTop="16dp"
+           android:layout_marginBottom="40dp"
+           android:layout_marginHorizontal="24dp"
+           android:layout_gravity="center"
+
+           android:text="ОТправить код снова"
+           android:background="@color/splash"
+           android:textColor="@color/black"
+           android:clickable="false"/>
+   </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

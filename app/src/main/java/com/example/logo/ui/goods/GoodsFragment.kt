@@ -113,10 +113,6 @@ class GoodsFragment: Fragment() {
                     }
                     this.isSelectionRequired = true
                     this.isSingleSelection = true
-
-                    this.setOnCheckedStateChangeListener { group, checkedIds ->
-
-                    }
                 }
 
 
@@ -132,8 +128,8 @@ class GoodsFragment: Fragment() {
     private fun addToCart()
     {
 
-        showToast(requireContext(), (binding.chipGroupChooseSize.checkedChipId))
-//        Toast.makeText(requireContext(), "Добавлено в карзину", Toast.LENGTH_SHORT).show()
+//        showToast(requireContext(), (binding.chipGroupChooseSize.checkedChipId))
+
             // TODO дописать логику добавления в корзину
     }
 

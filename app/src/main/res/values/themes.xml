@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
     <style name="Theme.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -26,5 +27,17 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/splash</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModelStyle</item>
+
+    </style>
+    
+    <style name="AppModelStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_corners</item>
     </style>
 </resources>
