@@ -40,8 +40,8 @@ data class Data(
     @SerializedName("colors")
     val colors: List<Color>,
 
-    @SerializedName("size")
-    val size: List<Size>,
+    @SerializedName("sizes")
+    val sizes: List<Size>,
 
     @SerializedName("images")
     val images: List<Image>,

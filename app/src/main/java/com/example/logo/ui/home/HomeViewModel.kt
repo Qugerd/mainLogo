@@ -41,20 +41,19 @@ class HomeViewModel(): ViewModel(){
 
     private fun getListNewProduct(response: ProductList){
         val tmp: ArrayList<DataProductList> = ArrayList()
-        for (i in response.data) {
-            if (i.is_new){
-                tmp.add(i)
-            }
+
+        response.data.forEach {
+            if (it.is_new) tmp.add(it)
         }
+
         _productListNewClothesData.postValue(tmp)
     }
 
     private fun getListSalesProduct(response: ProductList){
         val tmp: ArrayList<DataProductList> = ArrayList()
-        for (i in response.data) {
-            if (i.is_sale){
-                tmp.add(i)
-            }
+
+        response.data.forEach{
+            if (it.is_sale) tmp.add(it)
         }
         _productListSalesData.postValue(tmp)
     }

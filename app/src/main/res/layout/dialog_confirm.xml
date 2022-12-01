@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bottom_sheet_corners">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_close"
+
+
+        android:layout_margin="22dp"
+        android:layout_gravity="end"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bag_confirm"
+        android:layout_gravity="center"
+
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="60dp"
+
+        android:gravity="center"
+
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:text="Спасибо, ваш заказ №124554-0005 оформлен!"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="60dp"
+
+        android:gravity="center"
+
+        android:textSize="16dp"
+
+        android:text="Менеджер свяжется с вами для уточнения деталей"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="46dp"
+        android:gravity="center">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+
+            android:drawableStart="@drawable/ic_vk"
+            android:text="Vkontakte"
+            android:textSize="12dp"
+            android:gravity="center|end"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="105dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+
+            android:layout_marginStart="16dp"
+
+            android:textSize="12dp"
+            android:drawableStart="@drawable/ic_youtube"
+            android:text="YouTube"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="16dp"
+
+            android:drawableStart="@drawable/ic_telegram"
+            android:textSize="12dp"
+            android:text="Telegram"
+            android:gravity="center"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -66,9 +66,10 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
         }
         
         binding.cardViewFirst.setOnClickListener{
-            Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_homeFragment_to_categoryFragment)
         }
+
     }
 
     override fun onItemClick(position: String?) {

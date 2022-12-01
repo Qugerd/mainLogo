@@ -39,7 +39,11 @@
             android:id="@+id/goodsFragment"
             android:name="com.example.logo.ui.goods.GoodsFragment"
             android:label="fragment_goods"
-            tools:layout="@layout/fragment_goods" />
+            tools:layout="@layout/fragment_goods" >
+            <action
+                android:id="@+id/action_goodsFragment_self"
+                app:destination="@id/goodsFragment" />
+        </fragment>
         <fragment
             android:id="@+id/categoryFragment"
             android:name="com.example.logo.ui.category.CategoryFragment"

@@ -32,7 +32,7 @@
         android:background="@drawable/seach_view_background"
         android:iconifiedByDefault="true"
         android:inputType="text"
-
+        app:layout_scrollFlags="scroll|enterAlways"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

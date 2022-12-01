@@ -1,29 +1,31 @@
 package com.example.logo.ui.goods
 
-import android.graphics.drawable.Drawable
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import com.example.logo.R
 import com.example.logo.databinding.FragmentGoodsBinding
 import com.example.logo.ui.home.HomeViewModel
+import com.google.android.material.chip.Chip
 
 class GoodsFragment: Fragment() {
 
     companion object{
         const val KEY_NAME = "NAME"
         const val BASE_URL = "http://10.0.2.2:80"
+
+        fun showToast(context: Context, string: Any){
+            Toast.makeText(context, "$string", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private var _binding: FragmentGoodsBinding? = null
@@ -50,7 +52,9 @@ class GoodsFragment: Fragment() {
         viewModel.getProductDetails(slug)
 
         viewModel.productDetailsLiveData.observe(viewLifecycleOwner){
+
             with(binding){
+
                 textViewBrend.text = it.slug
                 textCategory.text = it.category.name
                 textViewName.text = it.name
@@ -76,6 +80,42 @@ class GoodsFragment: Fragment() {
                     goBack()
                 }
 
+                chipGroupChooseColor.apply {
+
+                    it.colors.forEach {
+                        val chip = Chip(this.context)
+
+                        chip.text= it.colorName
+                        chip.isClickable = true
+                        chip.isCheckable = true
+
+                        chip.setOnClickListener{
+                            showToast(requireContext(), chip.text)
+                        }
+
+                        this.addView(chip)
+                    }
+
+                    this.isSelectionRequired = true
+                    this.isSingleSelection = true
+                }
+
+                chipGroupChooseSize.apply {
+
+                    it.sizes.forEach {
+                        val chip = Chip(this.context)
+
+                        chip.text= it.sizeName
+                        chip.isClickable = true
+                        chip.isCheckable = true
+                        this.addView(chip)
+
+                    }
+                    this.isSelectionRequired = true
+                    this.isSingleSelection = true
+                }
+
+
 
             }
 
@@ -87,7 +127,10 @@ class GoodsFragment: Fragment() {
 
     private fun addToCart()
     {
-        Toast.makeText(requireContext(), "Добавлено в карзину", Toast.LENGTH_SHORT).show()
+
+//        showToast(requireContext(), (binding.chipGroupChooseSize.checkedChipId))
+
+            // TODO дописать логику добавления в корзину
     }
 
     private fun goBack(){
