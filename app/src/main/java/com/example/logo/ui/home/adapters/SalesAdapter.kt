@@ -7,53 +7,63 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.bumptech.glide.Glide
+import com.example.logo.Constant.BASE_URL
 import com.example.logo.R
+import com.example.logo.data.modelMainPage.MainPageInfo
+import com.example.logo.data.modelMainPage.SaleProduct
 import com.example.logo.data.modelProductList.DataProductList
 import com.example.logo.databinding.ItemCardSalesBinding
-import com.example.logo.ui.goods.GoodsFragment.Companion.BASE_URL
+import com.example.logo.databinding.ItemNewClothesBinding
 
-class SalesAdapter(private val data: List<DataProductList>?, private val listener: NewClothesAdapter.Listener)
+class SalesAdapter(private val mList: List<SaleProduct>, private val listener: NewClothesAdapter.Listener)
     :Adapter<SalesAdapter.SalesViewHolder>() {
 
     class SalesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private val binding = ItemCardSalesBinding.bind(itemView)
+        private val binding = ItemNewClothesBinding.bind(itemView)
 
-        fun bind(listener: NewClothesAdapter.Listener, data: List<DataProductList>?) = with(binding){
+        fun bind(listener: NewClothesAdapter.Listener, mList: List<SaleProduct>) = with(binding){
             itemView.setOnClickListener {
                 listener.onItemClick(
-                    data?.get(position)?.slug
+                    mList?.get(position)?.slug
                 )
             }
         }
 
-        var tvName = binding.textViewName
-        var tvPrice = binding.textViewPrice
-        var tvLabelNew = binding.textViewLabelNew
-        var ivNewClothes = binding.imageViewNewClothes
-        val tvNewPrice = binding.textViewNewPrice
+        val tvName = binding.tvName
+        val ivNewClothes = binding.imageView
+        val tvPrice = binding.tvPrice
+        val tvPriceDiscount = binding.tvPriceDiscount
+        val tvLabel = binding.tvLabel
+        val tvLabelSale = binding.tvLabelSale
+        val imView = binding.imView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SalesViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_card_sales, parent, false)
+            .inflate(R.layout.item_new_clothes, parent, false)
 
         return SalesViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: SalesViewHolder, position: Int) {
 
-        val itemsViewModel = data?.get(position)
+        val itemsViewModel = mList?.get(position)
         val i = itemsViewModel!!.images
 
-        holder.bind(listener, data)
-        holder.tvName.text = itemsViewModel?.name
-        holder.tvNewPrice.text = itemsViewModel?.discount_price + " ₽"
-        holder.tvPrice.apply {
-            paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-            text = itemsViewModel?.price + " ₽"
-        }
+        holder.bind(listener, mList)
 
+        with(holder){
+            tvName.text = itemsViewModel?.name
+            tvPrice.text = itemsViewModel?.discountPrice + " ₽"
+            tvPriceDiscount.apply {
+                paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                text = itemsViewModel?.price + " ₽"
+            }
+            tvLabel.visibility = View.GONE
+            tvLabelSale.visibility = View.VISIBLE
+            imView.visibility = View.GONE
+        }
 
         if (itemsViewModel.images.isNotEmpty())
         {
@@ -65,6 +75,6 @@ class SalesAdapter(private val data: List<DataProductList>?, private val listene
     }
 
     override fun getItemCount(): Int {
-        return data!!.size
+        return mList.size
     }
 }

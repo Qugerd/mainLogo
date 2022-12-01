@@ -2,6 +2,7 @@ package com.example.logo.api
 
 
 import com.example.logo.data.modelCategoryList.Categor
+import com.example.logo.data.modelMainPage.MainPageInfo
 import com.example.logo.data.modelProductDetails.ProductDetails
 import com.example.logo.data.modelProductList.ProductList
 import retrofit2.http.GET
@@ -20,4 +21,8 @@ interface RetrofitApiGetFunction: ApiGetFunction{
     // http://10.0.2.2:80/api/categories/list
     @GET("api/categories/list")
     override suspend fun getCategoryList(): Categor
+
+    // http://localhost/api/main_page
+    @GET("api/main_page")
+    override suspend fun getMainPageInfo(): MainPageInfo
 }

@@ -12,6 +12,7 @@ import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.logo.Constant.BASE_URL
 import com.example.logo.R
 import com.example.logo.databinding.FragmentGoodsBinding
 import com.example.logo.ui.home.HomeViewModel
@@ -21,7 +22,6 @@ class GoodsFragment: Fragment() {
 
     companion object{
         const val KEY_NAME = "NAME"
-        const val BASE_URL = "http://10.0.2.2:80"
 
         fun showToast(context: Context, string: Any){
             Toast.makeText(context, "$string", Toast.LENGTH_SHORT).show()

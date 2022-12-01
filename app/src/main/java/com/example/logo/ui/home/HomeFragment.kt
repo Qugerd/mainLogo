@@ -11,12 +11,15 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.logo.Constant.TEST
 import com.example.logo.R
 import com.example.logo.databinding.FragmentHomeBinding
 import com.example.logo.ui.goods.GoodsFragment
 import com.example.logo.ui.goods.GoodsFragment.Companion.KEY_NAME
 import com.example.logo.ui.home.adapters.NewClothesAdapter
 import com.example.logo.ui.home.adapters.SalesAdapter
+import cz.intik.overflowindicator.SimpleSnapHelper
+import com.example.logo.Constant.print
 
 class HomeFragment : Fragment(), NewClothesAdapter.Listener{
 
@@ -46,23 +49,35 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
             LinearLayoutManager.HORIZONTAL, false)
 
 
-        viewModel.productListSalesData.observe(viewLifecycleOwner){
-            recycleViewSales.adapter = SalesAdapter(it, this)
-            Log.d("test", "Sales = ${it.size}")
+//        viewModel.productListSalesData.observe(viewLifecycleOwner){
+//            recycleViewSales.adapter = SalesAdapter(it, this)
+//            Log.d("test", "Sales = ${it.size}")
+//        }
+
+        viewModel.mainPageInfo.observe(viewLifecycleOwner){
+            recycleViewNewCollection.adapter = NewClothesAdapter(it.newProducts, this)
+            recycleViewSales.adapter = SalesAdapter(it.saleProducts, this)
         }
 
+        val viewOverflowPagerIndicator = binding.viewOverflowPagerIndicator
         viewModel.productListNewClothesData.observe(viewLifecycleOwner) {
             with(binding){
                 // textViewCategory.text = it[0].slug
                 // TODO: Нужна картнка для категории  и добавить логику для второй категории
             }
-            recycleViewNewCollection.adapter = NewClothesAdapter(it, this)
+//            recycleViewNewCollection.adapter = NewClothesAdapter(it, this)
+//            viewOverflowPagerIndicator.attachToRecyclerView(recycleViewNewCollection)
             Log.d("test", "New = ${it.size}")
         }
 
+//        val snapHelper = SimpleSnapHelper(viewOverflowPagerIndicator)
+//        snapHelper.attachToRecyclerView(recycleViewNewCollection)
+
         with(viewModel){
-            getProductList()
+            getMainPageInfo()
+//            getProductList()
             getCategoryList()
+
         }
         
         binding.cardViewFirst.setOnClickListener{

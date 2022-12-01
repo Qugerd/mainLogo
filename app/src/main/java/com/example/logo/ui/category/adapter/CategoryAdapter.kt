@@ -16,9 +16,9 @@ class CategoryAdapter(private val data: List<DataProductList>)
 
         private val binding = ItemNewClothesBinding.bind(itemView)
 
-        var tvName = binding.textViewName
-        var tvPrice = binding.textViewPrice
-        var ivNewClothes = binding.imageViewNewClothes
+        var tvName = binding.tvName
+        var tvPrice = binding.tvPrice
+        var ivNewClothes = binding.imageView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {

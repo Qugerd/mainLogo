@@ -16,23 +16,24 @@
 
 
         android:text="@string/app_name"
-        android:textSize="30dp"
+        android:textSize="36dp"
         android:gravity="center"
-        android:fontFamily="@font/futura_book"
-        android:textColor="@color/black"
-
-        android:background="@color/splash"/>
+        android:fontFamily="@font/futura_medium"
+        android:textColor="@color/grey" />
 
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginTop="10dp"
+
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="17dp"
+
         android:background="@drawable/seach_view_background"
-        android:iconifiedByDefault="true"
+        android:queryHint="search"
+
+        android:iconifiedByDefault="false"
         android:inputType="text"
-        app:layout_scrollFlags="scroll|enterAlways"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,8 +58,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
 
-                android:layout_marginTop="10dp"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginHorizontal="16dp"
                 app:cardCornerRadius="15dp"
 
                 app:layout_constraintStart_toStartOf="parent"
@@ -137,22 +138,42 @@
                 android:id="@+id/textViewNew"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:fontFamily="@font/pt_root_bold"
-                android:text="@string/new_clothes"
-                android:textColor="@color/semi_black"
 
-                android:textSize="36dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="44dp"
+                android:layout_marginStart="16dp"
+
+                android:fontFamily="@font/cormorant_garamond_semibold"
+                android:text="@string/new_clothes"
+                android:textColor="@color/grey"
+
+                android:textSize="20dp"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardViewSecond" />
+
+
+            <cz.intik.overflowindicator.OverflowPagerIndicator
+                android:id="@+id/viewOverflowPagerIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:indicatorFillColor="@color/grey"
+                app:indicatorStrokeColor="@color/black"
+                app:indicatorSize="8dp"
+
+                android:layout_marginEnd="16dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/textViewNew"
+                app:layout_constraintBottom_toBottomOf="@id/textViewNew"/>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewNewCollection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="16dp"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -162,13 +183,17 @@
                 android:id="@+id/textViewSales"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:fontFamily="@font/pt_root_bold"
-                android:text="@string/sales"
-                android:textColor="@color/semi_black"
 
-                android:textSize="36dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="50dp"
+                android:layout_marginStart="16dp"
+
+                android:fontFamily="@font/cormorant_garamond_semibold"
+                android:text="@string/sales"
+                android:textColor="@color/grey"
+
+
+                android:textSize="20dp"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/recyclerViewNewCollection" />
 
@@ -176,8 +201,8 @@
                 android:id="@+id/recyclerViewSales"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="16dp"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
