@@ -4,24 +4,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.bumptech.glide.Glide
 import com.example.logo.Constant
-import com.example.logo.Constant.BASE_URL
 import com.example.logo.R
-import com.example.logo.data.modelMainPage.NewProduct
-import com.example.logo.data.modelProductList.DataProductList
+import com.example.logo.data.modelMainPage.SaleProduct
 import com.example.logo.databinding.ItemNewClothesBinding
 
-class NewClothesAdapter(private val mList: List<NewProduct>, private val listener: Listener)
-    :Adapter<NewClothesAdapter.NewClothesViewHolder>() {
+class CategoryAdapter(private val mList: List<SaleProduct>, private val listener: NewClothesAdapter.Listener)
+    : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
-    class NewClothesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class CategoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val binding = ItemNewClothesBinding.bind(itemView)
 
 
-        fun bind(listener: Listener, mList: List<NewProduct>) = with(binding){
+        fun bind(listener: NewClothesAdapter.Listener, mList: List<SaleProduct>) = with(binding){
             itemView.setOnClickListener {
                 listener.onItemClick(
                     mList?.get(position)?.slug
@@ -36,15 +33,15 @@ class NewClothesAdapter(private val mList: List<NewProduct>, private val listene
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewClothesViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
 
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_new_clothes, parent, false)
+            .inflate(R.layout.item_card_sales, parent, false)
 
-        return NewClothesViewHolder(view)
+        return CategoryViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: NewClothesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
 
         val itemsViewModel = mList?.get(position)
         val i = itemsViewModel!!.images
@@ -56,7 +53,7 @@ class NewClothesAdapter(private val mList: List<NewProduct>, private val listene
         if (itemsViewModel!!.images.isNotEmpty())
         {
             Glide.with(holder.ivNewClothes)
-                .load(BASE_URL + i.get(0).path)
+                .load(Constant.BASE_URL + i.get(0).path)
                 .into(holder.ivNewClothes)
         }
         else holder.ivNewClothes.setImageResource(R.drawable.jesus)

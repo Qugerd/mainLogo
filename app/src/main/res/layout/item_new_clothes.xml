@@ -120,7 +120,7 @@
                 android:gravity="start|center"
 
                 android:textColor="#32302F"
-                android:textSize="18dp" />
+                android:textSize="18dp"/>
 
             <ImageView
                 android:layout_width="36dp"

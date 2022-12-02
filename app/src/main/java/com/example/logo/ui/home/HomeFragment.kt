@@ -1,30 +1,49 @@
 package com.example.logo.ui.home
 
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.util.Log
+import android.print.PrintAttributes.Margins
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.TEXT_ALIGNMENT_TEXT_END
+import android.view.View.TEXT_ALIGNMENT_TEXT_START
 import android.view.ViewGroup
-import android.widget.Toast
+import android.view.ViewGroup.MarginLayoutParams
+import android.widget.Button
+import android.widget.FrameLayout
+import android.widget.LinearLayout
+import android.widget.LinearLayout.LayoutParams
+import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.marginEnd
+import androidx.core.view.marginStart
+import androidx.core.view.marginTop
+import androidx.core.view.setMargins
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.example.logo.Constant.TEST
+import androidx.recyclerview.widget.RecyclerView
 import com.example.logo.R
 import com.example.logo.databinding.FragmentHomeBinding
-import com.example.logo.ui.goods.GoodsFragment
 import com.example.logo.ui.goods.GoodsFragment.Companion.KEY_NAME
 import com.example.logo.ui.home.adapters.NewClothesAdapter
 import com.example.logo.ui.home.adapters.SalesAdapter
 import cz.intik.overflowindicator.SimpleSnapHelper
 import com.example.logo.Constant.print
+import com.example.logo.Container
+import com.example.logo.databinding.ContainerRvBinding
+import com.example.logo.ui.home.adapters.CategoryAdapter
 
 class HomeFragment : Fragment(), NewClothesAdapter.Listener{
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private var _b: ContainerRvBinding? = null
+    private val b get() = _b!!
 
     private var viewModel: HomeViewModel = HomeViewModel()
 
@@ -49,29 +68,78 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
             LinearLayoutManager.HORIZONTAL, false)
 
 
-//        viewModel.productListSalesData.observe(viewLifecycleOwner){
-//            recycleViewSales.adapter = SalesAdapter(it, this)
-//            Log.d("test", "Sales = ${it.size}")
-//        }
+        val viewOverflowPagerIndicator = binding.viewOverflowPagerIndicator
 
         viewModel.mainPageInfo.observe(viewLifecycleOwner){
+
             recycleViewNewCollection.adapter = NewClothesAdapter(it.newProducts, this)
             recycleViewSales.adapter = SalesAdapter(it.saleProducts, this)
-        }
+            viewOverflowPagerIndicator.attachToRecyclerView(recycleViewNewCollection)
 
-        val viewOverflowPagerIndicator = binding.viewOverflowPagerIndicator
-        viewModel.productListNewClothesData.observe(viewLifecycleOwner) {
-            with(binding){
-                // textViewCategory.text = it[0].slug
-                // TODO: Нужна картнка для категории  и добавить логику для второй категории
+
+            val adapter = CategoryAdapter(it.saleProducts, this)
+            it.categories.forEach {
+                if (it.parentId == null){
+
+                    print("categor name", it.name)
+
+                    val fr = binding.fr
+
+
+                    val linearLayout = LinearLayout(requireContext())
+
+                    val params = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+                    params.setMargins(0, 64, 64, 32)
+                    linearLayout.layoutParams = params
+                    linearLayout.orientation = LinearLayout.HORIZONTAL
+
+
+
+
+                    val tvSlug = TextView(requireContext()).apply {
+                        text = it.name
+                        gravity = Gravity.START
+
+                        typeface = ResourcesCompat.getFont(requireContext(), R.font.cormorant_garamond_semibold)
+                        textSize = 20f
+                        isAllCaps = true
+
+                        setTextColor(Color.rgb(81,85,98))
+
+                    }
+                    tvSlug.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+                    linearLayout.addView(tvSlug)
+
+
+                    val tv = TextView(requireContext()).apply {
+                        typeface = ResourcesCompat.getFont(requireContext(), R.font.montserrat_medium)
+                        text = "Все"
+                        gravity = Gravity.END
+                        textSize = 16f
+                        setTextColor(Color.rgb(81,85,98))
+                    }
+                    tv.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+                    linearLayout.addView(tv)
+
+
+
+                    val rv = RecyclerView(requireContext())
+                    rv.layoutManager = LinearLayoutManager(requireContext(),
+                       LinearLayoutManager.HORIZONTAL, false)
+                    rv.adapter  = adapter
+
+
+                    fr.addView(linearLayout)
+                    fr.addView(rv)
+                }
             }
-//            recycleViewNewCollection.adapter = NewClothesAdapter(it, this)
-//            viewOverflowPagerIndicator.attachToRecyclerView(recycleViewNewCollection)
-            Log.d("test", "New = ${it.size}")
         }
 
-//        val snapHelper = SimpleSnapHelper(viewOverflowPagerIndicator)
-//        snapHelper.attachToRecyclerView(recycleViewNewCollection)
+
+        val snapHelper = SimpleSnapHelper(viewOverflowPagerIndicator)
+        snapHelper.attachToRecyclerView(recycleViewNewCollection)
+
+
 
         with(viewModel){
             getMainPageInfo()
