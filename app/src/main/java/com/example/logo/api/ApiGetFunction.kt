@@ -14,4 +14,6 @@ interface ApiGetFunction {
     suspend fun getCategoryList() : Categor
 
     suspend fun getMainPageInfo() : MainPageInfo
+
+    suspend fun getCategoryProductList(categoryName: String) : ProductList
 }

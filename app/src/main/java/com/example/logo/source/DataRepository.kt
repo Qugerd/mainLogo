@@ -24,4 +24,8 @@ class DataRepository(private val apiGetFunction: ApiGetFunction) {
     suspend fun getMainPageInfo() : MainPageInfo {
         return apiGetFunction.getMainPageInfo()
     }
+
+    suspend fun getCategoryProductList(categoryName: String): ProductList{
+        return apiGetFunction.getCategoryProductList(categoryName)
+    }
 }
