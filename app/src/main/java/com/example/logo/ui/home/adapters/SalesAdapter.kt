@@ -9,18 +9,15 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.bumptech.glide.Glide
 import com.example.logo.Constant.BASE_URL
 import com.example.logo.R
-import com.example.logo.data.modelMainPage.MainPageInfo
 import com.example.logo.data.modelMainPage.SaleProduct
-import com.example.logo.data.modelProductList.DataProductList
-import com.example.logo.databinding.ItemCardSalesBinding
-import com.example.logo.databinding.ItemNewClothesBinding
+import com.example.logo.databinding.ItemBigCardBinding
 
 class SalesAdapter(private val mList: List<SaleProduct>, private val listener: NewClothesAdapter.Listener)
     :Adapter<SalesAdapter.SalesViewHolder>() {
 
     class SalesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private val binding = ItemNewClothesBinding.bind(itemView)
+        private val binding = ItemBigCardBinding.bind(itemView)
 
         fun bind(listener: NewClothesAdapter.Listener, mList: List<SaleProduct>) = with(binding){
             itemView.setOnClickListener {
@@ -41,7 +38,7 @@ class SalesAdapter(private val mList: List<SaleProduct>, private val listener: N
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SalesViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_new_clothes, parent, false)
+            .inflate(R.layout.item_big_card, parent, false)
 
         return SalesViewHolder(view)
     }

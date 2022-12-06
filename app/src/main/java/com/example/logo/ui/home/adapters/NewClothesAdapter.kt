@@ -6,19 +6,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.bumptech.glide.Glide
-import com.example.logo.Constant
 import com.example.logo.Constant.BASE_URL
 import com.example.logo.R
 import com.example.logo.data.modelMainPage.NewProduct
-import com.example.logo.data.modelProductList.DataProductList
-import com.example.logo.databinding.ItemNewClothesBinding
+import com.example.logo.databinding.ItemBigCardBinding
 
 class NewClothesAdapter(private val mList: List<NewProduct>, private val listener: Listener)
     :Adapter<NewClothesAdapter.NewClothesViewHolder>() {
 
     class NewClothesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private val binding = ItemNewClothesBinding.bind(itemView)
+        private val binding = ItemBigCardBinding.bind(itemView)
 
 
         fun bind(listener: Listener, mList: List<NewProduct>) = with(binding){
@@ -39,7 +37,7 @@ class NewClothesAdapter(private val mList: List<NewProduct>, private val listene
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewClothesViewHolder {
 
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_new_clothes, parent, false)
+            .inflate(R.layout.item_big_card, parent, false)
 
         return NewClothesViewHolder(view)
     }

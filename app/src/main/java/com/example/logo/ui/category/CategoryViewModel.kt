@@ -23,12 +23,17 @@ class CategoryViewModel: ViewModel() {
 
 
     fun getProductDetails() {
-        viewModelScope.launch {
-            val response = withContext(Dispatchers.IO) {
-                dataRepository.getProductList()
+        try {
+            viewModelScope.launch {
+                val response = withContext(Dispatchers.IO) {
+                    dataRepository.getProductList()
+                }
+                Log.d("test", "О продукте: ${response.data}")
+                _categoryProductData.postValue(response.data)
             }
-            Log.d("test", "О продукте: ${response.data}")
-            _categoryProductData.postValue(response.data)
+        }
+        catch (e: Exception){
+            e.printStackTrace()
         }
     }
 }

@@ -48,6 +48,20 @@ class HomeViewModel(): ViewModel(){
         }
     }
 
+    fun getCategoryProductList(categoryName: String){
+        try {
+            viewModelScope.launch {
+                val response = withContext(Dispatchers.IO) {
+                    dataRepository.getCategoryProductList(categoryName)
+                }
+                print("cat", response.data.size)
+            }
+        }
+        catch (e: Exception){
+            e.message
+        }
+
+    }
 //    fun getProductList() {
 //        viewModelScope.launch {
 //            val response = withContext(Dispatchers.IO) {
@@ -90,10 +104,16 @@ class HomeViewModel(): ViewModel(){
 
     fun getCategoryList() {
         viewModelScope.launch {
-            val response = withContext(Dispatchers.IO) {
-                dataRepository.getCategoryList()
+
+            try {
+                val response = withContext(Dispatchers.IO) {
+                    dataRepository.getCategoryList()
+                }
+                Log.d("test", "Категория: ${response}")
             }
-            Log.d("test", "Категория: ${response}")
+            catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 }

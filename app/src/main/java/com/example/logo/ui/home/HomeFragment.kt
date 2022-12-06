@@ -16,12 +16,10 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.LinearLayout.LayoutParams
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
-import androidx.core.view.marginEnd
-import androidx.core.view.marginStart
-import androidx.core.view.marginTop
-import androidx.core.view.setMargins
+import androidx.core.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,9 +40,6 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private var _b: ContainerRvBinding? = null
-    private val b get() = _b!!
-
     private var viewModel: HomeViewModel = HomeViewModel()
 
     override fun onCreateView(
@@ -63,27 +58,40 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
         recycleViewNewCollection.layoutManager = LinearLayoutManager(requireContext(),
             LinearLayoutManager.HORIZONTAL, false)
 
+        val viewOverflowPagerIndicator = binding.viewOverflowPagerIndicator
+        val snapHelper = SimpleSnapHelper(viewOverflowPagerIndicator)
+        snapHelper.attachToRecyclerView(recycleViewNewCollection)
+
+
         val recycleViewSales = binding.recyclerViewSales
         recycleViewSales.layoutManager = LinearLayoutManager(requireContext(),
             LinearLayoutManager.HORIZONTAL, false)
 
+        val viewOverflowPagerIndicator2 = binding.viewOverflowPagerIndicator2
+        val snapHelper2 = SimpleSnapHelper(viewOverflowPagerIndicator2)
+        snapHelper2.attachToRecyclerView(recycleViewSales)
 
-        val viewOverflowPagerIndicator = binding.viewOverflowPagerIndicator
+
 
         viewModel.mainPageInfo.observe(viewLifecycleOwner){
-
             recycleViewNewCollection.adapter = NewClothesAdapter(it.newProducts, this)
-            recycleViewSales.adapter = SalesAdapter(it.saleProducts, this)
             viewOverflowPagerIndicator.attachToRecyclerView(recycleViewNewCollection)
 
+            recycleViewSales.adapter = SalesAdapter(it.saleProducts, this)
+            viewOverflowPagerIndicator2.attachToRecyclerView(recycleViewSales)
+
+
+            val fr = binding.fr
+
+            if ( fr.isNotEmpty()) fr.removeAllViews()
 
             val adapter = CategoryAdapter(it.saleProducts, this)
             it.categories.forEach {
-                if (it.parentId == null){
+
+                if (it.parentId == "45"){
 
                     print("categor name", it.name)
 
-                    val fr = binding.fr
 
 
                     val linearLayout = LinearLayout(requireContext())
@@ -92,8 +100,6 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
                     params.setMargins(0, 64, 64, 32)
                     linearLayout.layoutParams = params
                     linearLayout.orientation = LinearLayout.HORIZONTAL
-
-
 
 
                     val tvSlug = TextView(requireContext()).apply {
@@ -105,9 +111,8 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
                         isAllCaps = true
 
                         setTextColor(Color.rgb(81,85,98))
-
+                        layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
                     }
-                    tvSlug.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
                     linearLayout.addView(tvSlug)
 
 
@@ -117,8 +122,11 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
                         gravity = Gravity.END
                         textSize = 16f
                         setTextColor(Color.rgb(81,85,98))
+                        layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+                        setOnClickListener {
+                            Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
+                        }
                     }
-                    tv.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
                     linearLayout.addView(tv)
 
 
@@ -136,23 +144,17 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
         }
 
 
-        val snapHelper = SimpleSnapHelper(viewOverflowPagerIndicator)
-        snapHelper.attachToRecyclerView(recycleViewNewCollection)
-
-
-
         with(viewModel){
             getMainPageInfo()
 //            getProductList()
-            getCategoryList()
-
+//            getCategoryList()
+//            getCategoryProductList("aut")
         }
         
         binding.cardViewFirst.setOnClickListener{
 //            Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_homeFragment_to_categoryFragment)
         }
-
     }
 
     override fun onItemClick(position: String?) {

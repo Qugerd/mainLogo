@@ -8,14 +8,15 @@ import com.bumptech.glide.Glide
 import com.example.logo.Constant
 import com.example.logo.R
 import com.example.logo.data.modelMainPage.SaleProduct
-import com.example.logo.databinding.ItemNewClothesBinding
+import com.example.logo.databinding.ItemCardBinding
+
 
 class CategoryAdapter(private val mList: List<SaleProduct>, private val listener: NewClothesAdapter.Listener)
     : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     class CategoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private val binding = ItemNewClothesBinding.bind(itemView)
+        private val binding = ItemCardBinding.bind(itemView)
 
 
         fun bind(listener: NewClothesAdapter.Listener, mList: List<SaleProduct>) = with(binding){
@@ -36,7 +37,7 @@ class CategoryAdapter(private val mList: List<SaleProduct>, private val listener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
 
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_card_sales, parent, false)
+            .inflate(R.layout.item_card, parent, false)
 
         return CategoryViewHolder(view)
     }
