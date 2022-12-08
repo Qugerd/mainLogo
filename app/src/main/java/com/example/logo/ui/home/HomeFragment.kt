@@ -150,7 +150,11 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
 //            getCategoryList()
 //            getCategoryProductList("aut")
         }
-        
+
+        binding.searchView.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+        }
+
         binding.cardViewFirst.setOnClickListener{
 //            Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_homeFragment_to_categoryFragment)

@@ -34,6 +34,9 @@
             <action
                 android:id="@+id/action_homeFragment_to_categoryFragment"
                 app:destination="@id/categoryFragment" />
+            <action
+                android:id="@+id/action_homeFragment_to_searchFragment"
+                app:destination="@id/searchFragment" />
         </fragment>
         <fragment
             android:id="@+id/goodsFragment"
@@ -49,6 +52,15 @@
             android:name="com.example.logo.ui.category.CategoryFragment"
             android:label="fragment_category"
             tools:layout="@layout/fragment_category" />
+        <fragment
+            android:id="@+id/searchFragment"
+            android:name="com.example.logo.ui.search.SearchFragment"
+            android:label="fragment_search"
+            tools:layout="@layout/fragment_search" >
+            <action
+                android:id="@+id/action_searchFragment_to_categoryFragment"
+                app:destination="@id/categoryFragment" />
+        </fragment>
     </navigation>
 
 </navigation>

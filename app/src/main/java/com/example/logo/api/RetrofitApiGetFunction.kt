@@ -26,9 +26,11 @@ interface RetrofitApiGetFunction: ApiGetFunction{
     @GET("api/main_page")
     override suspend fun getMainPageInfo(): MainPageInfo
 
-    // http://localhost/api/catalog/product/list?category%20name=aut
+    // http://localhost/api/catalog/product/list?category%20name=
     @GET("api/catalog/product/list")
-    override suspend fun getCategoryProductList(@Query("category%20name") categoryName: String): ProductList {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getCategoryProductList(@Query("category%20name") categoryName: String): ProductList
+
+    // http://localhost/api/catalog/product/list?search_query=
+    @GET("api/catalog/product/list")
+    override suspend fun getSearchQuery(@Query("search_query") query: String): ProductList
 }

@@ -35,17 +35,24 @@ class HomeViewModel(): ViewModel(){
     private val _productDetailsLiveData = MutableLiveData<Data>()
     val productDetailsLiveData: LiveData<Data> = _productDetailsLiveData
 
-    private val _mainPageInfo= MutableLiveData<MainPageInfo>()
+    private val _mainPageInfo = MutableLiveData<MainPageInfo>()
     val mainPageInfo: LiveData<MainPageInfo> = _mainPageInfo
 
     fun getMainPageInfo(){
-        viewModelScope.launch {
-            val response = withContext(Dispatchers.IO) {
-                dataRepository.getMainPageInfo()
-            }
 
-            _mainPageInfo.postValue(response)
+        try {
+            viewModelScope.launch {
+                val response = withContext(Dispatchers.IO) {
+                    dataRepository.getMainPageInfo()
+                }
+
+                _mainPageInfo.postValue(response)
+            }
         }
+        catch (e:Exception){
+            e.printStackTrace()
+        }
+
     }
 
     fun getCategoryProductList(categoryName: String){
@@ -93,12 +100,17 @@ class HomeViewModel(): ViewModel(){
     }
 
     fun getProductDetails(slug: String) {
-        viewModelScope.launch {
-            val response = withContext(Dispatchers.IO) {
-                dataRepository.getProductDetails(slug)
+        try {
+            viewModelScope.launch {
+                val response = withContext(Dispatchers.IO) {
+                    dataRepository.getProductDetails(slug)
+                }
+                Log.d("test", "О продукте: ${response.data}")
+                _productDetailsLiveData.postValue(response.data)
             }
-            Log.d("test", "О продукте: ${response.data}")
-            _productDetailsLiveData.postValue(response.data)
+        }
+        catch (e: Exception){
+            e.printStackTrace()
         }
     }
 

@@ -28,4 +28,8 @@ class DataRepository(private val apiGetFunction: ApiGetFunction) {
     suspend fun getCategoryProductList(categoryName: String): ProductList{
         return apiGetFunction.getCategoryProductList(categoryName)
     }
+
+    suspend fun getSearchQuery(query: String) : ProductList{
+        return apiGetFunction.getSearchQuery(query)
+    }
 }
