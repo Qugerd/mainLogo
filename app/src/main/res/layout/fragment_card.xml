@@ -20,16 +20,17 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:gravity="center"
 
             android:layout_marginStart="15dp"
 
-            android:shadowRadius="@integer/material_motion_duration_long_2"
-
             android:text="@string/card"
             android:textColor="@color/black"
-            android:textSize="15dp" />
+            android:textSize="22dp"
+            android:fontFamily="@font/cormorant_garamond_semibold"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -40,11 +41,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <TextView
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Card fragment"
-        android:textSize="40dp"
+
+        android:layout_marginBottom="26dp"
+        android:src="@drawable/ic_cart_empty"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+        android:layout_marginHorizontal="44dp"
+
+        android:fontFamily="@font/montserrat_regular"
+        android:gravity="center"
+        android:text="@string/cart_empty"
+        android:textColor="@color/grey"
+
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

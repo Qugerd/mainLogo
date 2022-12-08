@@ -54,4 +54,10 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.14.2'
 
     implementation 'com.github.santalu:maskara:1.0.0'
+
+//    implementation 'com.github.martinstamenkovski:ARIndicatorView:2.0.0'
+//
+    implementation 'com.github.intik:overflow-pager-indicator:3.1.0'
+
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
 }

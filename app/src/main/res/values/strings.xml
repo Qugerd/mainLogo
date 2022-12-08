@@ -4,15 +4,15 @@
     <string name="price">3890 Р</string>
     <string name="brend">Бренд</string>
     <string name="category">Категория</string>
-    <string name="color">Выбор цвета</string>
-    <string name="table_size">Таблица размеров</string>
+    <string name="color">Цвет</string>
+    <string name="table_size"><u>Таблица размеров</u></string>
     <string name="xs">XS</string>
     <string name="xl">XL</string>
     <string name="l">L</string>
     <string name="m">M</string>
-    <string name="add_to_card">Добавитьть в корзину</string>
+    <string name="add_to_card">В корзину</string>
     <string name="description">Описание</string>
-    <string name="size">Размер</string>
+    <string name="size">Выберите размер</string>
     <string name="home">Главная</string>
     <string name="profile">Профиль</string>
     <string name="favorite">Избранное</string>
@@ -26,9 +26,14 @@
     <string name="swim_suit">Купальники</string>
     <string name="home_wear">Домашняя одежда</string>
     <string name="marina">Marina Rinaldi</string>
-    <string name="new_clothes">Новые поступления</string>
-    <string name="sales">Скидки</string>
+    <string name="new_clothes">НОВЫЕ ПОСТУПЛЕНИЯ</string>
+    <string name="sales">СКИДКИ</string>
+    <string name="cart_empty">Корзина пока пуста. Выберите что-нибудь в каталоге</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="toOrder">Перейти к оформлению</string>
+    <string name="all">Все</string>
+    <string name="mbLike">Вам может понравиться</string>
+    <string name="sale">СКИДКА</string>
+    <string name="write_primerky"><u>Запишитесь на примерку</u></string>
 </resources>

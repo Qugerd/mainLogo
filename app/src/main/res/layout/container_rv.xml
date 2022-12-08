@@ -1,0 +1,39 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/tvSlug"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="start"
+            android:text="Пальто"
+
+            android:textSize="20dp"
+            android:fontFamily="@font/cormorant_garamond_semibold"
+            android:textColor="@color/grey"/>
+
+        <TextView
+            android:id="@+id/tvAll"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/all"
+
+            android:layout_weight="5"
+            android:gravity="end|center"
+            android:layout_marginEnd="16dp"
+
+            android:textSize="16dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="#32302F"/>
+    </LinearLayout>
+
+</FrameLayout>

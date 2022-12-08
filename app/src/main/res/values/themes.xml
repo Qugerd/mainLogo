@@ -17,15 +17,15 @@
 
     <style name="Theme.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/splash</item>
-        <item name="colorPrimaryVariant">@color/splash</item>
-        <item name="colorOnPrimary">@color/splash</item>
+        <item name="colorPrimary">#515562</item>
+        <item name="colorPrimaryVariant">#515562</item>
+        <item name="colorOnPrimary">#515562</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/splash</item>
-        <item name="colorSecondaryVariant">@color/splash</item>
-        <item name="colorOnSecondary">@color/splash</item>
+        <item name="colorSecondary">#515562</item>
+        <item name="colorSecondaryVariant">#515562</item>
+        <item name="colorOnSecondary">#515562</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/splash</item>
+        <item name="android:statusBarColor">#515562</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -33,6 +33,8 @@
     <style name="AppBottomSheetDialogTheme"
         parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModelStyle</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize|stateVisible</item>
 
     </style>
     

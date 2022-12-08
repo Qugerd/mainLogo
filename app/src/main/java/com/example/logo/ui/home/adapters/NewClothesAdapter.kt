@@ -6,52 +6,52 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.bumptech.glide.Glide
+import com.example.logo.Constant.BASE_URL
 import com.example.logo.R
-import com.example.logo.data.modelProductList.DataProductList
-import com.example.logo.databinding.ItemNewClothesBinding
+import com.example.logo.data.modelMainPage.NewProduct
+import com.example.logo.databinding.ItemBigCardBinding
 
-class NewClothesAdapter(private val data: List<DataProductList>?, private val listener: Listener)
+class NewClothesAdapter(private val mList: List<NewProduct>, private val listener: Listener)
     :Adapter<NewClothesAdapter.NewClothesViewHolder>() {
 
     class NewClothesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private val binding = ItemNewClothesBinding.bind(itemView)
+        private val binding = ItemBigCardBinding.bind(itemView)
 
 
-        fun bind(listener: Listener, data: List<DataProductList>?) = with(binding){
+        fun bind(listener: Listener, mList: List<NewProduct>) = with(binding){
             itemView.setOnClickListener {
                 listener.onItemClick(
-                    data?.get(position)?.slug
+                    mList?.get(position)?.slug
                 )
             }
+
         }
 
-        var tvName = binding.textViewName
-        var tvPrice = binding.textViewPrice
-        var ivNewClothes = binding.imageViewNewClothes
+        var tvName = binding.tvName
+        var tvPrice = binding.tvPrice
+        var ivNewClothes = binding.imageView
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewClothesViewHolder {
 
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_new_clothes, parent, false)
+            .inflate(R.layout.item_big_card, parent, false)
 
         return NewClothesViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: NewClothesViewHolder, position: Int) {
 
-        val BASE_URL = "http://10.0.2.2:80"
-
-        val itemsViewModel = data?.get(position)
+        val itemsViewModel = mList?.get(position)
         val i = itemsViewModel!!.images
 
-        holder.bind(listener, data)
+        holder.bind(listener, mList)
         holder.tvName.text = itemsViewModel?.name
         holder.tvPrice.text = itemsViewModel?.price + " ₽"
 
-        if (itemsViewModel.images.isNotEmpty())
+        if (itemsViewModel!!.images.isNotEmpty())
         {
             Glide.with(holder.ivNewClothes)
                 .load(BASE_URL + i.get(0).path)
@@ -65,6 +65,6 @@ class NewClothesAdapter(private val data: List<DataProductList>?, private val li
     }
 
     override fun getItemCount(): Int {
-        return data!!.size
+        return mList.size
     }
 }

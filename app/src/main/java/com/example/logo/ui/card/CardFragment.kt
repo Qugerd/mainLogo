@@ -38,7 +38,7 @@ class CardFragment:Fragment() {
     }
 
     fun showInputNumber(){
-        val bottomSheet = OrderConfirmBottomSheet()
+        val bottomSheet = RegistrationBottomSheet()
         bottomSheet.show(childFragmentManager, "")
     }
 }
