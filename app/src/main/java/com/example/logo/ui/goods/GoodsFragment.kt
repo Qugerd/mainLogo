@@ -9,12 +9,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.children
 import androidx.core.view.forEach
+import androidx.core.view.get
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
+import com.example.logo.Constant
 import com.example.logo.Constant.BASE_URL
 import com.example.logo.Constant.RUB_SIMBOL
 import com.example.logo.R
@@ -39,6 +43,7 @@ class GoodsFragment: Fragment() {
     private val binding get() = _binding!!
 
     private var viewModel: HomeViewModel = HomeViewModel()
+    private val sizeList: ArrayList<String> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,16 +65,23 @@ class GoodsFragment: Fragment() {
         viewModel.getProductDetails(slug)
 
 
+        initView()
+
+
+
+    }
+
+    private fun initView() {
         viewModel.productDetailsLiveData.observe(viewLifecycleOwner){
 
             with(binding){
 
                 tvName.text = "${it.name.capitalize()} ${it.category.name.capitalize()} ${it.slug.capitalize()}"
-                tvPriceNew.text = it.price
+                tvPriceNew.text = it.discountPrice
                 textViewDescriptionText.text = it.description
                 tvPrice.apply {
                     paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-                    text = it.discountPrice + RUB_SIMBOL
+                    text = it.price + RUB_SIMBOL
                 }
                 if (it.isNew) textViewLabelNew.visibility = View.VISIBLE
                 if (it.isSale) textViewLabelSale.visibility = View.VISIBLE
@@ -90,7 +102,6 @@ class GoodsFragment: Fragment() {
                     goBack()
                 }
 
-                
 
                 chipGroupChooseColor.apply {
 
@@ -115,9 +126,10 @@ class GoodsFragment: Fragment() {
                 chipGroupChooseSize.apply {
 
                     it.sizes.forEach {
+                        sizeList.add(it.sizeName)
                         val chip = Chip(this.context)
 
-                        chip.text= it.sizeName
+                        chip.text = it.sizeName
                         chip.isClickable = true
                         chip.isCheckable = true
                         this.addView(chip)
@@ -128,17 +140,13 @@ class GoodsFragment: Fragment() {
                 }
 
 
-
                 textViewTableSize.setOnClickListener {
                     showTableSize()
                 }
 
             }
 
-       }
-
-
-
+        }
     }
 
     fun showTableSize(){
@@ -150,10 +158,17 @@ class GoodsFragment: Fragment() {
 
     private fun addToCart()
     {
+        if (binding.chipGroupChooseSize.checkedChipId == -1){
+            val bundle = Bundle()
+            bundle.putStringArrayList("key", sizeList)
 
-//        showToast(requireContext(), (binding.chipGroupChooseSize.checkedChipId))
+            val bottomSheet = ChooseSize()
+            bottomSheet.show(childFragmentManager, "")
+            bottomSheet.arguments = bundle
+        }
+       
 
-            // TODO дописать логику добавления в корзину
+
     }
 
     private fun goBack(){
