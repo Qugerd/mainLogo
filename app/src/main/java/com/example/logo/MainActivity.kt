@@ -4,6 +4,8 @@ import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.Navigation
@@ -36,8 +38,32 @@ class MainActivity : AppCompatActivity(){
             R.id.homeGraph, R.id.favoriteFragment, R.id.cardFragment, R.id.profileFragment
         ))
 
+        navController.addOnDestinationChangedListener{ _, destination, _ ->
+            when (destination.id){
+                R.id.gallery -> {
+                    navView.visibility = View.GONE
+                    window?.setFlags(
+                        WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                        WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                    window!!.decorView.apply {
+                        systemUiVisibility =
+                            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
+                    }
+                }
+                else -> {
+                    navView.visibility = View.VISIBLE
+
+                    window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                    window!!.decorView.apply {
+                        systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+                    }
+                }
+            }
+        }
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         supportActionBar!!.hide()
+
     }
 }
