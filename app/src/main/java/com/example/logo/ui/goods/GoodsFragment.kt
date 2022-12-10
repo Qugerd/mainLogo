@@ -70,7 +70,6 @@ class GoodsFragment() : Fragment(){
 
 
         viewModel.getProductDetails(slug)
-
         initView()
     }
 
@@ -89,7 +88,8 @@ class GoodsFragment() : Fragment(){
                 if (it.isNew) textViewLabelNew.visibility = View.VISIBLE
                 if (it.isSale) textViewLabelSale.visibility = View.VISIBLE
 
-                if(imagePaths.isNotEmpty()) imagePaths.clear()
+//                if(imagePaths.isNotEmpty()) imagePaths.clear()
+                // TODO: Педелать очистку массива, при повторном открытии пустйо массив
 
 //                val imageList = ArrayList<SlideModel>()
                 if (imageList.isEmpty()){
@@ -99,6 +99,12 @@ class GoodsFragment() : Fragment(){
                     }
                 }
 
+                if (imagePaths.isEmpty()){
+                    it.images.forEach {
+                        imagePaths.add(BASE_URL + it.path)
+                    }
+                    Log.d("test", "size:${imagePaths.size}")
+                }
 
                 imageView.setImageList(imageList)
                 imageView.setItemClickListener(object : ItemClickListener {

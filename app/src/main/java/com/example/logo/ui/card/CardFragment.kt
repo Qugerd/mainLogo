@@ -37,7 +37,7 @@ class CardFragment:Fragment() {
         }
     }
 
-    fun showInputNumber(){
+    private fun showInputNumber(){
         val bottomSheet = RegistrationBottomSheet()
         bottomSheet.show(childFragmentManager, "")
     }

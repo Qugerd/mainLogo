@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.logo.Constant.TEST
 import com.example.logo.Constant.print
 import com.example.logo.api.RetrofitInstance
+import com.example.logo.data.modelMainPage.DataMainPage
 import com.example.logo.data.modelMainPage.MainPageInfo
 import com.example.logo.data.modelProductDetails.Data
 import com.example.logo.data.modelProductList.DataProductList
@@ -35,8 +36,8 @@ class HomeViewModel(): ViewModel(){
     private val _productDetailsLiveData = MutableLiveData<Data>()
     val productDetailsLiveData: LiveData<Data> = _productDetailsLiveData
 
-    private val _mainPageInfo = MutableLiveData<MainPageInfo>()
-    val mainPageInfo: LiveData<MainPageInfo> = _mainPageInfo
+    private val _mainPageInfo = MutableLiveData<DataMainPage>()
+    val mainPageInfo: LiveData<DataMainPage> = _mainPageInfo
 
     fun getMainPageInfo(){
 
@@ -46,7 +47,7 @@ class HomeViewModel(): ViewModel(){
                     dataRepository.getMainPageInfo()
                 }
 
-                _mainPageInfo.postValue(response)
+                _mainPageInfo.postValue(response.data)
             }
         }
         catch (e:Exception){
