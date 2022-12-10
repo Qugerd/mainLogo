@@ -46,6 +46,9 @@
             <action
                 android:id="@+id/action_goodsFragment_self"
                 app:destination="@id/goodsFragment" />
+            <action
+                android:id="@+id/action_goodsFragment_to_gallery"
+                app:destination="@id/gallery" />
         </fragment>
         <fragment
             android:id="@+id/categoryFragment"
@@ -61,6 +64,11 @@
                 android:id="@+id/action_searchFragment_to_categoryFragment"
                 app:destination="@id/categoryFragment" />
         </fragment>
+        <fragment
+            android:id="@+id/gallery"
+            android:name="com.example.logo.ui.goods.Gallery"
+            android:label="fragment_gallery"
+            tools:layout="@layout/fragment_gallery" />
     </navigation>
 
 </navigation>

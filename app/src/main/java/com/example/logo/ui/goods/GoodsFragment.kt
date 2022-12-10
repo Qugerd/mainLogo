@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.view.children
 import androidx.core.view.forEach
 import androidx.core.view.get
@@ -16,7 +17,9 @@ import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.logo.Constant
 import com.example.logo.Constant.BASE_URL
@@ -29,14 +32,17 @@ import com.example.logo.databinding.FragmentGoodsBinding
 import com.example.logo.ui.home.HomeViewModel
 import com.google.android.material.chip.Chip
 
-class GoodsFragment: Fragment() {
+class GoodsFragment() : Fragment(){
 
     companion object{
         const val KEY_NAME = "NAME"
+        const val KEY_POSITION = "POSITION"
 
         fun showToast(context: Context, string: Any){
             Toast.makeText(context, "$string", Toast.LENGTH_SHORT).show()
         }
+
+       val imagePaths = ArrayList<String>()
     }
 
     private var _binding: FragmentGoodsBinding? = null
@@ -44,6 +50,7 @@ class GoodsFragment: Fragment() {
 
     private var viewModel: HomeViewModel = HomeViewModel()
     private val sizeList: ArrayList<String> = arrayListOf()
+    private val imageList = ArrayList<SlideModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,11 +71,7 @@ class GoodsFragment: Fragment() {
 
         viewModel.getProductDetails(slug)
 
-
         initView()
-
-
-
     }
 
     private fun initView() {
@@ -86,13 +89,24 @@ class GoodsFragment: Fragment() {
                 if (it.isNew) textViewLabelNew.visibility = View.VISIBLE
                 if (it.isSale) textViewLabelSale.visibility = View.VISIBLE
 
+                if(imagePaths.isNotEmpty()) imagePaths.clear()
 
-                val imageList = ArrayList<SlideModel>()
-                it.images.forEach {
-                    imageList.add(SlideModel(BASE_URL + it.path, ScaleTypes.CENTER_CROP))
+//                val imageList = ArrayList<SlideModel>()
+                if (imageList.isEmpty()){
+                    it.images.forEach {
+                        imageList.add(SlideModel(BASE_URL + it.path, ScaleTypes.CENTER_CROP))
+                        imagePaths.add(BASE_URL + it.path)
+                    }
                 }
-                imageView.setImageList(imageList)
 
+
+                imageView.setImageList(imageList)
+                imageView.setItemClickListener(object : ItemClickListener {
+                    override fun onItemSelected(position: Int) {
+                        Toast.makeText(requireContext(), "position $position", Toast.LENGTH_SHORT).show()
+                        showGallery(position)
+                    }
+                })
 
 
                 buttonAddToCard.setOnClickListener {
@@ -149,6 +163,11 @@ class GoodsFragment: Fragment() {
         }
     }
 
+    private fun showGallery(position: Int) {
+        findNavController().navigate(R.id.action_goodsFragment_to_gallery,
+        bundleOf(KEY_POSITION to position))
+    }
+
     fun showTableSize(){
         val bottomSheet = TableSize()
         bottomSheet.isCancelable = false
@@ -166,9 +185,6 @@ class GoodsFragment: Fragment() {
             bottomSheet.show(childFragmentManager, "")
             bottomSheet.arguments = bundle
         }
-       
-
-
     }
 
     private fun goBack(){
