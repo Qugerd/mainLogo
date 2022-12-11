@@ -89,7 +89,7 @@ class GoodsFragment() : Fragment(){
                 if (it.isSale) textViewLabelSale.visibility = View.VISIBLE
 
 //                if(imagePaths.isNotEmpty()) imagePaths.clear()
-                // TODO: Педелать очистку массива, при повторном открытии пустйо массив
+
 
 //                val imageList = ArrayList<SlideModel>()
                 if (imageList.isEmpty()){
@@ -98,7 +98,7 @@ class GoodsFragment() : Fragment(){
                         imagePaths.add(BASE_URL + it.path)
                     }
                 }
-
+                // TODO: Педелать очистку массива, при повторном открытии пустйо массив
                 if (imagePaths.isEmpty()){
                     it.images.forEach {
                         imagePaths.add(BASE_URL + it.path)

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.logo.R
 import com.example.logo.bottom_sheets.InpuSmsBottomSheet
 import com.example.logo.bottom_sheets.OrderConfirmBottomSheet
@@ -33,7 +34,7 @@ class CardFragment:Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnOrder.setOnClickListener{
-            showInputNumber()
+            findNavController().navigate(R.id.action_cardFragment_to_ordering)
         }
     }
 

@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(){
         val navController = findNavController(R.id.nav_host_fragment)
 
         val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.homeGraph, R.id.favoriteFragment, R.id.cardFragment, R.id.profileFragment
+            R.id.homeGraph, R.id.favoriteFragment, R.id.cartGraph, R.id.profileFragment
         ))
 
         navController.addOnDestinationChangedListener{ _, destination, _ ->
