@@ -2,6 +2,9 @@ package com.example.logo.source
 
 
 import com.example.logo.api.ApiGetFunction
+import com.example.logo.data.Modifications
+import com.example.logo.data.modelCart.CartList
+import com.example.logo.data.modelCart.Product
 import com.example.logo.data.modelCategoryList.Categor
 import com.example.logo.data.modelMainPage.MainPageInfo
 import com.example.logo.data.modelProductDetails.ProductDetails
@@ -31,5 +34,9 @@ class DataRepository(private val apiGetFunction: ApiGetFunction) {
 
     suspend fun getSearchQuery(query: String) : ProductList{
         return apiGetFunction.getSearchQuery(query)
+    }
+
+    suspend fun postCart(mList : Modifications) : CartList{
+        return apiGetFunction.postCart(mList)
     }
 }

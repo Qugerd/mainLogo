@@ -1,11 +1,16 @@
 package com.example.logo.api
 
 
+import com.example.logo.data.Modifications
+import com.example.logo.data.modelCart.CartList
+import com.example.logo.data.modelCart.Product
 import com.example.logo.data.modelCategoryList.Categor
 import com.example.logo.data.modelMainPage.MainPageInfo
 import com.example.logo.data.modelProductDetails.ProductDetails
 import com.example.logo.data.modelProductList.ProductList
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface RetrofitApiGetFunction: ApiGetFunction{
@@ -33,4 +38,8 @@ interface RetrofitApiGetFunction: ApiGetFunction{
     // http://localhost/api/catalog/product/list?search_query=
     @GET("api/catalog/product/list")
     override suspend fun getSearchQuery(@Query("search_query") query: String): ProductList
+
+    // http://localhost/api/cart/set_quantity
+    @POST("api/cart/set_quantity")
+    override suspend fun postCart(@Body body: Modifications): CartList
 }

@@ -8,7 +8,41 @@
     tools:context=".ui.card.CardFragment">
 
 
+    <LinearLayout
+        android:id="@+id/containerEmpty"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="26dp"
+            android:src="@drawable/ic_cart_empty"/>
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+
+            android:layout_marginHorizontal="44dp"
+
+            android:fontFamily="@font/montserrat_regular"
+            android:gravity="center"
+            android:text="@string/cart_empty"
+            android:textColor="@color/grey"
+
+            android:textSize="16dp" />
+    </LinearLayout>
+
     <ScrollView
+        android:id="@+id/scrollView"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -53,6 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp">
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
@@ -88,7 +123,7 @@
                     android:layout_height="wrap_content"
 
                     android:fontFamily="@font/montserrat_medium"
-                    android:text="3шт."
+                    android:text=""
                     android:textSize="16dp"
                     android:textColor="@color/black_2"
 
@@ -130,7 +165,7 @@
                     android:layout_height="wrap_content"
 
                     android:fontFamily="@font/montserrat_medium"
-                    android:text="224 000 ₽"
+                    android:text=""
                     android:textSize="16dp"
                     android:textColor="@color/black_2"
 
@@ -172,7 +207,7 @@
                     android:layout_height="wrap_content"
 
                     android:fontFamily="@font/montserrat_medium"
-                    android:text="24 000 ₽"
+                    android:text=""
                     android:textSize="16dp"
                     android:textColor="@color/black_2"
 
@@ -214,7 +249,7 @@
                     android:layout_height="wrap_content"
 
                     android:fontFamily="@font/montserrat_semibold"
-                    android:text="200 000 ₽"
+                    android:text=""
                     android:textSize="18dp"
                     android:textColor="@color/black_2"
 
@@ -301,7 +336,7 @@
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/linearLayout"
+        android:id="@+id/cardBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"

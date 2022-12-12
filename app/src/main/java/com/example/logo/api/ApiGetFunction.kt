@@ -1,5 +1,8 @@
 package com.example.logo.api
 
+import com.example.logo.data.Modifications
+import com.example.logo.data.modelCart.CartList
+import com.example.logo.data.modelCart.Product
 import com.example.logo.data.modelCategoryList.Categor
 import com.example.logo.data.modelMainPage.MainPageInfo
 import com.example.logo.data.modelProductDetails.ProductDetails
@@ -18,4 +21,6 @@ interface ApiGetFunction {
     suspend fun getCategoryProductList(categoryName: String) : ProductList
 
     suspend fun getSearchQuery(query: String) : ProductList
+
+    suspend fun postCart(body: Modifications) : CartList
 }
