@@ -19,8 +19,8 @@ import com.example.logo.Constant.RUB_SIMBOL
 import com.example.logo.R
 import com.example.logo.bottom_sheets.ChooseSize
 import com.example.logo.bottom_sheets.TableSize
-import com.example.logo.data.Modification
-import com.example.logo.data.Modifications
+import com.example.logo.data.post.modification.Modification
+import com.example.logo.data.post.modification.Modifications
 import com.example.logo.data.modelCart.Product
 import com.example.logo.databinding.FragmentGoodsBinding
 import com.example.logo.ui.card.CartViewModel
@@ -33,8 +33,9 @@ class GoodsFragment() : Fragment(){
     companion object{
         const val KEY_NAME = "NAME"
         const val KEY_POSITION = "POSITION"
-        private const val QUANTITY = 1
+        const val QUANTITY = 1
 
+        var idProduct by Delegates.notNull<Int>()
         val mList : ArrayList<Modification> = arrayListOf()
         val mod : Modifications = Modifications(mList)
 
@@ -55,7 +56,7 @@ class GoodsFragment() : Fragment(){
     private val sizeList: ArrayList<String> = arrayListOf()
     private val imageList = ArrayList<SlideModel>()
 
-    private var idProduct by Delegates.notNull<Int>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -201,8 +202,11 @@ class GoodsFragment() : Fragment(){
         }
         else{
             mList.add(Modification(idProduct, QUANTITY))
+            binding.buttonAddToCard.setBackgroundResource(R.drawable.btn_background)
+            binding.buttonAddToCard.text = "В корзине"
+            binding.buttonAddToCard.setTextColor(android.graphics.Color.rgb(0,0,0))
             Log.d("test", "$mod")
-//            vm.postCart(mod)
+            vm.postCart(mod)
         }
     }
 

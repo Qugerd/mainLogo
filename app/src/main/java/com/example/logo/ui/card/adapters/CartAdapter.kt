@@ -1,5 +1,6 @@
 package com.example.logo.ui.card.adapters
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,6 +45,10 @@ class CartAdapter(private val mList: List<Item>): Adapter<CartAdapter.ViewHolder
             tvCategory.text = iView.product.category.name
             tvPrice.text = iView.product.discountPrice
             tvOldPrice.text = iView.product.price
+            tvOldPrice.apply {
+                paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                text = iView.product.price + Constant.RUB_SIMBOL
+            }
             tvColor.text = iView.product.colors[0].colorName
             tvSize.text = iView.product.sizes[0].sizeName
 

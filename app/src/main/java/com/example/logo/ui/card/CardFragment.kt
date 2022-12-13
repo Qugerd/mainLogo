@@ -51,7 +51,7 @@ class CardFragment:Fragment() {
 
             else -> {
                 containerEmpty.visibility = View.VISIBLE
-                cardBtn.visibility = View.VISIBLE
+                cardBtn.visibility = View.GONE
                 scrollView.visibility = View.GONE
             }
         }

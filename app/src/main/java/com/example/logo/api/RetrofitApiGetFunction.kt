@@ -1,17 +1,16 @@
 package com.example.logo.api
 
 
-import com.example.logo.data.Modifications
+import com.example.logo.data.post.modification.Modifications
 import com.example.logo.data.modelCart.CartList
 import com.example.logo.data.modelCart.Product
 import com.example.logo.data.modelCategoryList.Categor
 import com.example.logo.data.modelMainPage.MainPageInfo
 import com.example.logo.data.modelProductDetails.ProductDetails
 import com.example.logo.data.modelProductList.ProductList
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import com.example.logo.data.postCheckSmsCode.CheckSms
+import retrofit2.http.*
+import java.security.Policy
 
 interface RetrofitApiGetFunction: ApiGetFunction{
 
@@ -42,4 +41,15 @@ interface RetrofitApiGetFunction: ApiGetFunction{
     // http://localhost/api/cart/set_quantity
     @POST("api/cart/set_quantity")
     override suspend fun postCart(@Body body: Modifications): CartList
+
+    // http://localhost/api/auth/sendSms
+    @FormUrlEncoded
+    @POST("api/auth/sendSms")
+    override suspend fun postPhoneNumber(@Field("phone") number: String,
+                                         @Field("policy") policy: Boolean)
+
+    // http://localhost/api/auth/checkSmsCode
+    @FormUrlEncoded
+    @POST("api/auth/checkSmsCode")
+    override suspend fun postCheckSmsCode(@Field("user_code") user_code: String) : CheckSms
 }

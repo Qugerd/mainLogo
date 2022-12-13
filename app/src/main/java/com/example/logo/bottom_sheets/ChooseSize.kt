@@ -13,7 +13,12 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.res.ResourcesCompat
 import com.example.logo.R
 import com.example.logo.data.modelProductDetails.Color
+import com.example.logo.data.post.modification.Modification
 import com.example.logo.databinding.DialogChooseSizeBinding
+import com.example.logo.ui.goods.GoodsFragment
+import com.example.logo.ui.goods.GoodsFragment.Companion.QUANTITY
+import com.example.logo.ui.goods.GoodsFragment.Companion.idProduct
+import com.example.logo.ui.goods.GoodsFragment.Companion.mList
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class ChooseSize : BottomSheetDialogFragment() {
@@ -72,6 +77,7 @@ class ChooseSize : BottomSheetDialogFragment() {
 
     private fun addToCart() {
         if (binding.radioGroup.checkedRadioButtonId >= 0){
+            mList.add(Modification(idProduct, QUANTITY))
             btnAdd.isClickable = false
             btnAdd.text = "В корзине"
             btnAdd.setBackgroundResource(R.drawable.btn_background)

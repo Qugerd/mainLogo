@@ -1,14 +1,16 @@
 package com.example.logo.source
 
 
+import android.util.Log
 import com.example.logo.api.ApiGetFunction
-import com.example.logo.data.Modifications
+import com.example.logo.data.post.modification.Modifications
 import com.example.logo.data.modelCart.CartList
 import com.example.logo.data.modelCart.Product
 import com.example.logo.data.modelCategoryList.Categor
 import com.example.logo.data.modelMainPage.MainPageInfo
 import com.example.logo.data.modelProductDetails.ProductDetails
 import com.example.logo.data.modelProductList.ProductList
+import com.example.logo.data.postCheckSmsCode.CheckSms
 
 class DataRepository(private val apiGetFunction: ApiGetFunction) {
 
@@ -38,5 +40,13 @@ class DataRepository(private val apiGetFunction: ApiGetFunction) {
 
     suspend fun postCart(mList : Modifications) : CartList{
         return apiGetFunction.postCart(mList)
+    }
+
+    suspend fun postPhoneNumber(number: String, policy: Boolean) {
+        return apiGetFunction.postPhoneNumber(number,  policy)
+    }
+
+    suspend fun postCheckSmsCode(user_code: String) : CheckSms {
+        return apiGetFunction.postCheckSmsCode(user_code)
     }
 }
