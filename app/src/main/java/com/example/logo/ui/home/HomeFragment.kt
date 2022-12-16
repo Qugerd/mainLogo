@@ -1,6 +1,7 @@
 package com.example.logo.ui.home
 
 import android.graphics.Color
+import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.print.PrintAttributes.Margins
@@ -17,6 +18,7 @@ import android.widget.LinearLayout
 import android.widget.LinearLayout.LayoutParams
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.*
@@ -32,8 +34,10 @@ import com.example.logo.ui.home.adapters.SalesAdapter
 import cz.intik.overflowindicator.SimpleSnapHelper
 import com.example.logo.Constant.print
 import com.example.logo.Container
+import com.example.logo.bottom_sheets.ChooseSize
 import com.example.logo.databinding.ContainerRvBinding
 import com.example.logo.ui.home.adapters.CategoryAdapter
+import com.google.android.material.badge.BadgeDrawable
 
 class HomeFragment : Fragment(), NewClothesAdapter.Listener{
 
@@ -72,8 +76,8 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
         snapHelper2.attachToRecyclerView(recycleViewSales)
 
 
-
         viewModel.mainPageInfo.observe(viewLifecycleOwner){
+
             recycleViewNewCollection.adapter = NewClothesAdapter(it.newProducts, this)
             viewOverflowPagerIndicator.attachToRecyclerView(recycleViewNewCollection)
 
@@ -88,7 +92,7 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
             val adapter = CategoryAdapter(it.saleProducts, this)
             it.categories.forEach {
 
-                if (it.parentId == "45"){
+                if (it.parentId == null){
 
                     print("categor name", it.name)
 
@@ -125,6 +129,7 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
                         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
                         setOnClickListener {
                             Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
+                            findNavController().navigate(R.id.action_homeFragment_to_categoryFragment)
                         }
                     }
                     linearLayout.addView(tv)
@@ -168,5 +173,16 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
         )
     }
 
+    override fun showSize(name: String) {
+        val bundle = Bundle()
+        bundle.putString("key", name)
+
+        val bottomSheet = ChooseSize()
+        bottomSheet.show(childFragmentManager, "")
+        bottomSheet.arguments = bundle
+    }
+
     // TODO: сделать поиск, кнопки на превью с дабовлением в корзину
+
+
 }

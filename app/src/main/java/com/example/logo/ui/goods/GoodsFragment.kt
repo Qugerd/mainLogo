@@ -21,11 +21,11 @@ import com.example.logo.bottom_sheets.ChooseSize
 import com.example.logo.bottom_sheets.TableSize
 import com.example.logo.data.post.modification.Modification
 import com.example.logo.data.post.modification.Modifications
-import com.example.logo.data.modelCart.Product
 import com.example.logo.databinding.FragmentGoodsBinding
 import com.example.logo.ui.card.CartViewModel
 import com.example.logo.ui.home.HomeViewModel
 import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipDrawable
 import kotlin.properties.Delegates
 
 class GoodsFragment() : Fragment(){
@@ -55,7 +55,6 @@ class GoodsFragment() : Fragment(){
     private var viewModel: HomeViewModel = HomeViewModel()
     private val sizeList: ArrayList<String> = arrayListOf()
     private val imageList = ArrayList<SlideModel>()
-
 
 
     override fun onCreateView(
@@ -133,24 +132,34 @@ class GoodsFragment() : Fragment(){
                 })
 
                 chipGroupChooseColor.apply {
+                    this.isSelectionRequired = true
+                    this.isSingleSelection = true
                     this.removeAllViewsInLayout()
-                    it.colors.forEach {
-                        val chip = Chip(this.context)
 
-                        chip.text= it.colorName
+                    it.colors.forEach {
+
+                        val chip = Chip(this.context)
+                        val color = it.colorName
+
                         chip.isClickable = true
                         chip.isCheckable = true
                         chip.id = it.id.toInt()
-
-                        chip.setOnClickListener{
-                            showToast(requireContext(), "Цвет ${chip.id}${chip.text}")
+                        chip.isCheckedIconVisible = false
+                        chip.setEnsureMinTouchTargetSize(false)
+                        chip.setOnClickListener {
+                            binding.tvColorValue.text = color
                         }
 
+                        chip.setChipDrawable(ChipDrawable.createFromAttributes(
+                            context,
+                            null,
+                            0,
+                            com.google.android.material.R.style.Widget_MaterialComponents_Chip_Choice)
+                        )
+                        this.chipSpacingHorizontal = 10
+                        this.chipSpacingVertical = 10
                         this.addView(chip)
                     }
-
-                    this.isSelectionRequired = true
-                    this.isSingleSelection = true
                 }
 
                 chipGroupChooseSize.apply {
@@ -163,9 +172,7 @@ class GoodsFragment() : Fragment(){
                         chip.isClickable = true
                         chip.isCheckable = true
                         chip.id = it.id.toInt()
-                        chip.setOnClickListener{
-                            showToast(requireContext(), "Размер ${chip.id}${chip.text}")
-                        }
+
                         this.addView(chip)
 
                     }
@@ -199,6 +206,21 @@ class GoodsFragment() : Fragment(){
             val bottomSheet = ChooseSize()
             bottomSheet.show(childFragmentManager, "")
             bottomSheet.arguments = bundle
+        }
+        else{
+            buttonState()
+        }
+    }
+
+    private fun buttonState(){
+        val product = Modification(idProduct, QUANTITY)
+        if (mList.contains(product)){
+            Log.d("test", "уже есть")
+            mList.remove(product)
+            binding.buttonAddToCard.setBackgroundResource(R.color.black_2)
+            binding.buttonAddToCard.text = "В корзину"
+            binding.buttonAddToCard.setTextColor(android.graphics.Color.rgb(255,255,255))
+            Log.d("test", "$mod")
         }
         else{
             mList.add(Modification(idProduct, QUANTITY))

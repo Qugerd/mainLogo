@@ -113,11 +113,22 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvPriceNew" />
 
+            <TextView
+                android:id="@+id/tvColorValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toEndOf="@+id/textViewChooseColor"
+                app:layout_constraintTop_toTopOf="@+id/textViewChooseColor"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewChooseColor"/>
+
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipGroupChooseColor"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
 
+                app:singleSelection="true"
                 android:layout_marginTop="12dp"
                 android:layout_marginHorizontal="16dp"
 

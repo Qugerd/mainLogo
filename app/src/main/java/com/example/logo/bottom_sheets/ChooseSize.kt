@@ -47,31 +47,36 @@ class ChooseSize : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val sizeNames = arguments?.getStringArrayList("key")
+        val name = arguments?.getString("key")
 
-        binding.icClose.setOnClickListener {
-            hideDialog()
+        Log.d("test", "name $name")
+
+        if (!sizeNames.isNullOrEmpty()){
+            binding.radioGroup.apply {
+                sizeNames?.forEach {
+                    val radio = RadioButton(requireContext())
+                    radio.text = it
+                    radio.textSize = 16f
+                    radio.typeface = ResourcesCompat.getFont(requireContext(), R.font.montserrat_regular)
+                    radio.setTextColor(android.graphics.Color.rgb(81,85,98))
+
+                    val params = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT
+                    )
+                    params.setMargins(0, 0, 0, 32)
+                    radio.layoutParams = params
+                    this.addView(radio)
+                }
+            }
         }
 
         btnAdd.setOnClickListener {
             addToCart()
         }
 
-        binding.radioGroup.apply {
-            sizeNames?.forEach {
-                val radio = RadioButton(requireContext())
-                radio.text = it
-                radio.textSize = 16f
-                radio.typeface = ResourcesCompat.getFont(requireContext(), R.font.montserrat_regular)
-                radio.setTextColor(android.graphics.Color.rgb(81,85,98))
-
-                val params = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT
-                )
-                params.setMargins(0, 0, 0, 32)
-                radio.layoutParams = params
-                this.addView(radio)
-            }
+        binding.icClose.setOnClickListener {
+            hideDialog()
         }
     }
 

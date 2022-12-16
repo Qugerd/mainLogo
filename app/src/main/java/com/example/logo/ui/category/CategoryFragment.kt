@@ -32,6 +32,8 @@ class CategoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.getProductDetails()
+
         val recycleV = binding.rv.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
         }
@@ -51,6 +53,6 @@ class CategoryFragment : Fragment() {
             recycleV.adapter = CategoryAdapter(it)
         }
 
-        viewModel.getProductDetails()
+
     }
 }

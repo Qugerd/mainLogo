@@ -98,6 +98,6 @@ class CardFragment:Fragment() {
 
     private fun showInputNumber(){
         val bottomSheet = RegistrationBottomSheet()
-        bottomSheet.show(childFragmentManager, "")
+        bottomSheet.show(childFragmentManager, "Авторизуйтесь, чтобы оформить заказ",)
     }
 }
