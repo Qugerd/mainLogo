@@ -18,6 +18,10 @@ interface RetrofitApiGetFunction: ApiGetFunction{
     @GET("api/catalog/product/list")
     override suspend fun getProductList() : ProductList
 
+    // http://localhost/api/catalog/product/list?sort_mode=
+    @GET("api/catalog/product/list")
+    override suspend fun getProductList(@Query("sort_mode") sortMode: Int): ProductList
+
     // http://10.0.2.2:80/api/catalog/product/details?slug=
     @GET("api/catalog/product/details")
     override suspend fun getProductDetails(@Query("slug") slug: String): ProductDetails

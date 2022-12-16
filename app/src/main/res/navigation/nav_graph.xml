@@ -39,9 +39,6 @@
             android:label="fragment_goods"
             tools:layout="@layout/fragment_goods" >
             <action
-                android:id="@+id/action_goodsFragment_self"
-                app:destination="@id/goodsFragment" />
-            <action
                 android:id="@+id/action_goodsFragment_to_gallery"
                 app:destination="@id/gallery" />
         </fragment>
@@ -49,7 +46,14 @@
             android:id="@+id/categoryFragment"
             android:name="com.example.logo.ui.category.CategoryFragment"
             android:label="fragment_category"
-            tools:layout="@layout/fragment_category" />
+            tools:layout="@layout/fragment_category" >
+            <action
+                android:id="@+id/action_categoryFragment_to_searchFragment"
+                app:destination="@id/searchFragment" />
+            <action
+                android:id="@+id/action_categoryFragment_to_goodsFragment"
+                app:destination="@id/goodsFragment" />
+        </fragment>
         <fragment
             android:id="@+id/searchFragment"
             android:name="com.example.logo.ui.search.SearchFragment"

@@ -45,6 +45,8 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
     private val binding get() = _binding!!
 
     private var viewModel: HomeViewModel = HomeViewModel()
+//    private val textViewCategory by lazy { binding.textViewCategory }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -84,7 +86,7 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
             recycleViewSales.adapter = SalesAdapter(it.saleProducts, this)
             viewOverflowPagerIndicator2.attachToRecyclerView(recycleViewSales)
 
-
+            binding.textViewCategory.text = it.categories[0].name
             val fr = binding.fr
 
             if ( fr.isNotEmpty()) fr.removeAllViews()
@@ -161,8 +163,11 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
         }
 
         binding.cardViewFirst.setOnClickListener{
+            val catName = binding.textViewCategory.text
 //            Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_homeFragment_to_categoryFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_categoryFragment,
+            bundleOf(KEY_NAME to catName)
+            )
         }
     }
 

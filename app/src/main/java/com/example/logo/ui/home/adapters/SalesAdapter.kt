@@ -25,6 +25,8 @@ class SalesAdapter(private val mList: List<SaleProduct>, private val listener: N
                     mList?.get(position)?.slug
                 )
             }
+
+
         }
 
         val tvName = binding.tvName

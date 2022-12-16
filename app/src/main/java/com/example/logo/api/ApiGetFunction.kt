@@ -14,6 +14,8 @@ interface ApiGetFunction {
 
     suspend fun getProductList() : ProductList
 
+    suspend fun getProductList(sortMode: Int) : ProductList
+
     suspend fun getProductDetails(slug: String): ProductDetails
 
     suspend fun getCategoryList() : Categor

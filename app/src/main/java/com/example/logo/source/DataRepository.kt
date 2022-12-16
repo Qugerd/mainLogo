@@ -18,6 +18,10 @@ class DataRepository(private val apiGetFunction: ApiGetFunction) {
         return apiGetFunction.getProductList()
     }
 
+        suspend fun getProductList(sortMode: Int) : ProductList {
+        return apiGetFunction.getProductList(sortMode)
+    }
+
     suspend fun getProductDetails(slug: String) : ProductDetails {
         return apiGetFunction.getProductDetails(slug)
     }
