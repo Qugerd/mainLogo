@@ -5,6 +5,7 @@ import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.print.PrintAttributes.Margins
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -45,8 +46,6 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
     private val binding get() = _binding!!
 
     private var viewModel: HomeViewModel = HomeViewModel()
-//    private val textViewCategory by lazy { binding.textViewCategory }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -150,7 +149,6 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
             }
         }
 
-
         with(viewModel){
             getMainPageInfo()
 //            getProductList()
@@ -178,9 +176,9 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
         )
     }
 
-    override fun showSize(name: String) {
+    override fun showSize(slug: String) {
         val bundle = Bundle()
-        bundle.putString("key", name)
+        bundle.putString("key", slug)
 
         val bottomSheet = ChooseSize()
         bottomSheet.show(childFragmentManager, "")
@@ -189,5 +187,10 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
 
     // TODO: сделать поиск, кнопки на превью с дабовлением в корзину
 
+    override fun onResume() {
+        super.onResume()
+        Log.d("test", "onResume")
+        binding.recyclerViewNewCollection.adapter?.notifyDataSetChanged()
+    }
 
 }

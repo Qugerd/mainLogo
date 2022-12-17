@@ -74,9 +74,15 @@ class InpuSmsBottomSheet: BottomSheetDialogFragment() {
                     vm.postCheckSmsCode(input.unMasked)
 
                     vm.token.observe(viewLifecycleOwner){
+                        Log.d("test", "token $it")
                         preferences.edit()
                             .putString(PREF_VALUE, it.token)
                             .apply()
+                    }
+
+                    if (!preferences.getString(APP, PREF_VALUE).isNullOrEmpty())
+                    {
+                        findNavController().navigate(R.id.action_inpuSmsBottomSheet_to_ordering)
                     }
                 }
             }

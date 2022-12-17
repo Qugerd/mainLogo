@@ -15,10 +15,14 @@ import com.example.logo.R
 import com.example.logo.data.modelProductDetails.Color
 import com.example.logo.data.post.modification.Modification
 import com.example.logo.databinding.DialogChooseSizeBinding
+import com.example.logo.databinding.FragmentHomeBinding
 import com.example.logo.ui.goods.GoodsFragment
 import com.example.logo.ui.goods.GoodsFragment.Companion.QUANTITY
 import com.example.logo.ui.goods.GoodsFragment.Companion.idProduct
 import com.example.logo.ui.goods.GoodsFragment.Companion.mList
+import com.example.logo.ui.home.HomeFragment
+import com.example.logo.ui.home.HomeViewModel
+import com.example.logo.ui.home.adapters.NewClothesAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class ChooseSize : BottomSheetDialogFragment() {
@@ -26,8 +30,9 @@ class ChooseSize : BottomSheetDialogFragment() {
     private var _binding: DialogChooseSizeBinding? = null
     private val binding get() = _binding!!
 
-    private val btnAdd: AppCompatButton by lazy { binding.btnToCart }
+    private val vm = HomeViewModel()
 
+    private val btnAdd: AppCompatButton by lazy { binding.btnToCart }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,9 +52,35 @@ class ChooseSize : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val sizeNames = arguments?.getStringArrayList("key")
-        val name = arguments?.getString("key")
+        val slug = arguments?.getString("key")
 
-        Log.d("test", "name $name")
+        Log.d("test", "name $slug")
+
+        if (!slug.isNullOrEmpty()){
+            vm.getProductDetails(slug)
+
+            vm.productDetailsLiveData.observe(viewLifecycleOwner){
+                idProduct = it.id.toInt()
+                binding.radioGroup.apply {
+                    it.sizes.forEach {
+
+                        val radio = RadioButton(requireContext())
+                        radio.text = it.sizeName
+                        radio.textSize = 16f
+                        radio.typeface = ResourcesCompat.getFont(requireContext(), R.font.montserrat_regular)
+                        radio.setTextColor(android.graphics.Color.rgb(81,85,98))
+
+                        val params = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.MATCH_PARENT
+                        )
+                        params.setMargins(0, 0, 0, 32)
+                        radio.layoutParams = params
+                        this.addView(radio)
+                    }
+                }
+            }
+        }
 
         if (!sizeNames.isNullOrEmpty()){
             binding.radioGroup.apply {

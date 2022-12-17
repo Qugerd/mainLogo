@@ -11,7 +11,9 @@ import com.bumptech.glide.Glide
 import com.example.logo.Constant.BASE_URL
 import com.example.logo.R
 import com.example.logo.data.modelMainPage.NewProduct
+import com.example.logo.data.post.modification.Modification
 import com.example.logo.databinding.ItemBigCardBinding
+import com.example.logo.ui.goods.GoodsFragment
 
 class NewClothesAdapter(private val mList: List<NewProduct>, private val listener: Listener)
     :Adapter<NewClothesAdapter.NewClothesViewHolder>() {
@@ -30,8 +32,12 @@ class NewClothesAdapter(private val mList: List<NewProduct>, private val listene
 
             btn.setOnClickListener {
                 listener.showSize(
-                    mList[position].name
+                    mList[position].slug
                 )
+//                Glide.with(addToCart)
+//                    .load(R.drawable.ic_cart__on)
+//                    .error(R.drawable.ic_cart__on)
+//                    .into(addToCart)
             }
         }
 
@@ -54,9 +60,11 @@ class NewClothesAdapter(private val mList: List<NewProduct>, private val listene
 
         val itemsViewModel = mList?.get(position)
         val i = itemsViewModel!!.images
-        val btn = holder.addToCart
+        val addToCart = holder.addToCart
 
-        holder.bind(listener, mList, btn)
+        checkInCart(addToCart, position)
+
+        holder.bind(listener, mList, addToCart)
         holder.tvName.text = itemsViewModel?.name
         holder.tvPrice.text = itemsViewModel?.price + " ₽"
 
@@ -67,8 +75,21 @@ class NewClothesAdapter(private val mList: List<NewProduct>, private val listene
                 .into(holder.ivNewClothes)
         }
         else holder.ivNewClothes.setImageResource(R.drawable.jesus)
+    }
 
+    override fun getItemCount(): Int {
+        return mList.size
+    }
 
+    private fun checkInCart(addToCard: ImageView, position: Int) {
+        mList[position].apply {
+            if (GoodsFragment.mList.contains(Modification(this.id.toInt(), 1))){
+                Glide.with(addToCard)
+                    .load(R.drawable.ic_cart__on)
+                    .error(R.drawable.ic_cart__on)
+                    .into(addToCard)
+            }
+        }
     }
 
     interface Listener{
@@ -76,17 +97,6 @@ class NewClothesAdapter(private val mList: List<NewProduct>, private val listene
         fun showSize(name : String)
     }
 
-    override fun getItemCount(): Int {
-        return mList.size
-    }
 
-//    private fun showSizes(name : String){
-//
-//        val bundle = Bundle()
-//        bundle.putString("key", name)
-//
-//        val bottomSheet = ChooseSize()
-//        bottomSheet.show(, "")
-//        bottomSheet.arguments = bundle
-//    }
+
 }

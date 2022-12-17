@@ -36,6 +36,10 @@ class CategoryAdapter(private val data: List<DataProductList>, private val liste
                 listener.showSize(
                     mList[position].name
                 )
+                Glide.with(btnAddToCard)
+                    .load(R.drawable.ic_cart__on)
+                    .error(R.drawable.ic_cart__on)
+                    .into(btnAddToCard)
             }
         }
 

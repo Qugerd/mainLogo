@@ -1,10 +1,12 @@
 package com.example.logo.api
 
 
+import com.example.logo.data.DataModel
 import com.example.logo.data.post.modification.Modifications
 import com.example.logo.data.modelCart.CartList
 import com.example.logo.data.modelCart.Product
 import com.example.logo.data.modelCategoryList.Categor
+import com.example.logo.data.modelDaData.DaData
 import com.example.logo.data.modelMainPage.MainPageInfo
 import com.example.logo.data.modelProductDetails.ProductDetails
 import com.example.logo.data.modelProductList.ProductList
@@ -56,4 +58,10 @@ interface RetrofitApiGetFunction: ApiGetFunction{
     @FormUrlEncoded
     @POST("api/auth/checkSmsCode")
     override suspend fun postCheckSmsCode(@Field("user_code") user_code: String) : CheckSms
+
+    // https://dadata.ru/api/4_1/rs/suggest/address
+    @Headers("Content-Type: application/json", "Accept: application/json",
+        "Authorization: Token a949cdd4aed5ec01c06a8ff23f32adc1284d1ac4")
+    @POST("suggestions/api/4_1/rs/suggest/address")
+    override suspend fun postAdress(@Body body: DataModel): DaData
 }

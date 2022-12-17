@@ -1,9 +1,11 @@
 package com.example.logo.api
 
+import com.example.logo.data.DataModel
 import com.example.logo.data.post.modification.Modifications
 import com.example.logo.data.modelCart.CartList
 import com.example.logo.data.modelCart.Product
 import com.example.logo.data.modelCategoryList.Categor
+import com.example.logo.data.modelDaData.DaData
 import com.example.logo.data.modelMainPage.MainPageInfo
 import com.example.logo.data.modelProductDetails.ProductDetails
 import com.example.logo.data.modelProductList.ProductList
@@ -31,4 +33,6 @@ interface ApiGetFunction {
     suspend fun postPhoneNumber(number: String, policy: Boolean)
 
     suspend fun postCheckSmsCode(user_code: String) : CheckSms
+
+    suspend fun postAdress(body: DataModel) : DaData
 }
