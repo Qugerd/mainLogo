@@ -50,6 +50,8 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        searchView.setOnQueryTextListener(this)
+        searchView.showKeyboard()
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext(),
         LinearLayoutManager.VERTICAL, false)
@@ -62,8 +64,7 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener {
         }
 
 
-        searchView.setOnQueryTextListener(this)
-        searchView.showKeyboard()
+
 
 
         itemCategory.setOnClickListener {

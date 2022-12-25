@@ -1,6 +1,5 @@
 package com.example.logo.ui.goods
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Paint
 import android.os.Bundle
@@ -10,33 +9,35 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.core.view.children
-import androidx.core.view.forEach
-import androidx.core.view.get
-import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
-import com.example.logo.Constant
 import com.example.logo.Constant.BASE_URL
 import com.example.logo.Constant.RUB_SIMBOL
 import com.example.logo.R
 import com.example.logo.bottom_sheets.ChooseSize
-import com.example.logo.bottom_sheets.RegistrationBottomSheet
 import com.example.logo.bottom_sheets.TableSize
+import com.example.logo.data.post.modification.Modification
+import com.example.logo.data.post.modification.Modifications
 import com.example.logo.databinding.FragmentGoodsBinding
+import com.example.logo.ui.card.CartViewModel
 import com.example.logo.ui.home.HomeViewModel
 import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipDrawable
+import kotlin.properties.Delegates
 
 class GoodsFragment() : Fragment(){
 
     companion object{
         const val KEY_NAME = "NAME"
         const val KEY_POSITION = "POSITION"
+        const val QUANTITY = 1
+
+        var idProduct by Delegates.notNull<Int>()
+        val mList : ArrayList<Modification> = arrayListOf()
+        val mod : Modifications = Modifications(mList)
 
         fun showToast(context: Context, string: Any){
             Toast.makeText(context, "$string", Toast.LENGTH_SHORT).show()
@@ -45,12 +46,16 @@ class GoodsFragment() : Fragment(){
        val imagePaths = ArrayList<String>()
     }
 
+
+    private val vm = CartViewModel()
+
     private var _binding: FragmentGoodsBinding? = null
     private val binding get() = _binding!!
 
     private var viewModel: HomeViewModel = HomeViewModel()
     private val sizeList: ArrayList<String> = arrayListOf()
     private val imageList = ArrayList<SlideModel>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -71,12 +76,24 @@ class GoodsFragment() : Fragment(){
 
         viewModel.getProductDetails(slug)
         initView()
+
+        binding.buttonAddToCard.setOnClickListener {
+            addToCart()
+        }
+        binding.buttonBack.setOnClickListener {
+            goBack()
+        }
+        binding.textViewTableSize.setOnClickListener {
+            showTableSize()
+        }
     }
 
     private fun initView() {
         viewModel.productDetailsLiveData.observe(viewLifecycleOwner){
 
             with(binding){
+
+                idProduct = it.id.toInt()
 
                 tvName.text = "${it.name.capitalize()} ${it.category.name.capitalize()} ${it.slug.capitalize()}"
                 tvPriceNew.text = it.discountPrice
@@ -98,7 +115,7 @@ class GoodsFragment() : Fragment(){
                         imagePaths.add(BASE_URL + it.path)
                     }
                 }
-                // TODO: Педелать очистку массива, при повторном открытии пустйо массив
+
                 if (imagePaths.isEmpty()){
                     it.images.forEach {
                         imagePaths.add(BASE_URL + it.path)
@@ -114,37 +131,39 @@ class GoodsFragment() : Fragment(){
                     }
                 })
 
-
-                buttonAddToCard.setOnClickListener {
-                    addToCart()
-                }
-                buttonBack.setOnClickListener {
-                    goBack()
-                }
-
-
                 chipGroupChooseColor.apply {
-
-                    it.colors.forEach {
-                        val chip = Chip(this.context)
-
-                        chip.text= it.colorName
-                        chip.isClickable = true
-                        chip.isCheckable = true
-
-                        chip.setOnClickListener{
-                            showToast(requireContext(), chip.text)
-                        }
-
-                        this.addView(chip)
-                    }
-
                     this.isSelectionRequired = true
                     this.isSingleSelection = true
+                    this.removeAllViewsInLayout()
+
+                    it.colors.forEach {
+
+                        val chip = Chip(this.context)
+                        val color = it.colorName
+
+                        chip.isClickable = true
+                        chip.isCheckable = true
+                        chip.id = it.id.toInt()
+                        chip.isCheckedIconVisible = false
+                        chip.setEnsureMinTouchTargetSize(false)
+                        chip.setOnClickListener {
+                            binding.tvColorValue.text = color
+                        }
+
+                        chip.setChipDrawable(ChipDrawable.createFromAttributes(
+                            context,
+                            null,
+                            0,
+                            com.google.android.material.R.style.Widget_MaterialComponents_Chip_Choice)
+                        )
+                        this.chipSpacingHorizontal = 10
+                        this.chipSpacingVertical = 10
+                        this.addView(chip)
+                    }
                 }
 
                 chipGroupChooseSize.apply {
-
+                    this.removeAllViewsInLayout()
                     it.sizes.forEach {
                         sizeList.add(it.sizeName)
                         val chip = Chip(this.context)
@@ -152,21 +171,18 @@ class GoodsFragment() : Fragment(){
                         chip.text = it.sizeName
                         chip.isClickable = true
                         chip.isCheckable = true
+                        chip.id = it.id.toInt()
+
                         this.addView(chip)
 
                     }
                     this.isSelectionRequired = true
                     this.isSingleSelection = true
                 }
-
-
-                textViewTableSize.setOnClickListener {
-                    showTableSize()
-                }
-
             }
 
         }
+
     }
 
     private fun showGallery(position: Int) {
@@ -174,7 +190,7 @@ class GoodsFragment() : Fragment(){
         bundleOf(KEY_POSITION to position))
     }
 
-    fun showTableSize(){
+    private fun showTableSize(){
         val bottomSheet = TableSize()
         bottomSheet.isCancelable = false
         bottomSheet.show(parentFragmentManager, "")
@@ -190,6 +206,29 @@ class GoodsFragment() : Fragment(){
             val bottomSheet = ChooseSize()
             bottomSheet.show(childFragmentManager, "")
             bottomSheet.arguments = bundle
+        }
+        else{
+            buttonState()
+        }
+    }
+
+    private fun buttonState(){
+        val product = Modification(idProduct, QUANTITY)
+        if (mList.contains(product)){
+            Log.d("test", "уже есть")
+            mList.remove(product)
+            binding.buttonAddToCard.setBackgroundResource(R.color.black_2)
+            binding.buttonAddToCard.text = "В корзину"
+            binding.buttonAddToCard.setTextColor(android.graphics.Color.rgb(255,255,255))
+            Log.d("test", "$mod")
+        }
+        else{
+            mList.add(Modification(idProduct, QUANTITY))
+            binding.buttonAddToCard.setBackgroundResource(R.drawable.btn_background)
+            binding.buttonAddToCard.text = "В корзине"
+            binding.buttonAddToCard.setTextColor(android.graphics.Color.rgb(0,0,0))
+            Log.d("test", "$mod")
+            vm.postCart(mod)
         }
     }
 

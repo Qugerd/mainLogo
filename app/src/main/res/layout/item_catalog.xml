@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="35dp"
-    android:layout_marginEnd="16dp">
 
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="16dp"
         android:layout_width="164dp"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -110,32 +107,22 @@
                 android:fontFamily="@font/montserrat_semibold"
 
                 android:gravity="start|center"
-                android:layout_weight="1"
+                android:layout_weight="0.9"
 
                 android:text="99 000 ₽"
                 android:textColor="#32302F"
                 android:textSize="16dp" />
 
-            <TextView
-                android:id="@+id/tvPriceDiscount"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
 
-                android:fontFamily="@font/montserrat_semibold"
-                android:layout_weight="3"
-                android:gravity="start|center"
-
-                android:textColor="#32302F"
-                android:textSize="18dp"/>
 
             <ImageView
+                android:id="@+id/btnAddToCard"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
 
-                android:layout_weight="1"
+                android:layout_weight="0.1"
 
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_bag_to_cart" />
         </LinearLayout>
     </LinearLayout>
-</androidx.cardview.widget.CardView>
