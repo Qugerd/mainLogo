@@ -14,5 +14,8 @@ object Constant {
     val RUB_SIMBOL = " ₽"
 
     val EMPTY= ""
+
+    var NAME : String? = null
+    var EMAIL : String? = null
 //    recyclerview.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
 }

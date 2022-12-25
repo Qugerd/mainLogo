@@ -71,6 +71,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Имя">
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/white"/>
@@ -80,9 +81,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="E-mail"
+                        android:inputType="textEmailAddress"
                         android:background="@color/white"/>
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
@@ -102,10 +105,12 @@
                     android:textColor="@color/black_2"/>
 
                 <RadioGroup
+                    android:id="@+id/radioGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp">
                     <RadioButton
+                        android:id="@+id/showroom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Самовывоз из шоурума"
@@ -114,6 +119,7 @@
                         android:textColor="@color/black_2"/>
 
                     <RadioButton
+                        android:id="@+id/delivery"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Доставка"
@@ -128,7 +134,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_margin="16dp">
+                android:layout_margin="16dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -174,16 +181,20 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_margin="16dp"
-                >
+                android:visibility="visible">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Населенный пункт">
-                    <com.google.android.material.textfield.TextInputEditText
+                    <AutoCompleteTextView
+                        android:id="@+id/inputCity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"/>
+                        android:background="@color/white"
+                        android:padding="16dp"
+                        android:layout_marginTop="10dp"
+                        android:completionThreshold="0"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -191,9 +202,11 @@
                     android:layout_height="wrap_content"
                     android:hint="Почтовый индекс">
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputIndex"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"/>
+                        android:background="@color/white"
+                        android:inputType="number"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -201,6 +214,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Улица">
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputStreet"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/white"/>
@@ -217,9 +231,11 @@
                         android:layout_weight="0.4"
                         android:layout_marginEnd="8dp">
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputHouseNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/white"/>
+                            android:background="@color/white"
+                            android:inputType="number"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -229,21 +245,25 @@
                         android:layout_weight="0.4"
                         android:layout_marginStart="8dp">
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputFlatNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/white"/>
+                            android:background="@color/white"
+                            android:inputType="number"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tvPay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Оплата"
                 android:fontFamily="@font/montserrat_semibold"
                 android:textSize="18dp"
                 android:textColor="@color/black_2"
-                android:layout_margin="16dp"/>
+                android:layout_margin="16dp"
+                android:visibility="gone"/>
 
             <LinearLayout
                 android:id="@+id/payShowroom"
@@ -252,7 +272,8 @@
                 android:orientation="vertical"
                 android:layout_margin="16dp"
                 android:background="#FAFAFB"
-                android:padding="20dp">
+                android:padding="20dp"
+                android:visibility="gone">
 
 
                 <TextView
@@ -285,7 +306,8 @@
                 android:orientation="vertical"
                 android:layout_margin="16dp"
                 android:background="#FAFAFB"
-                android:padding="20dp">
+                android:padding="20dp"
+                android:visibility="gone">
 
 
                 <TextView

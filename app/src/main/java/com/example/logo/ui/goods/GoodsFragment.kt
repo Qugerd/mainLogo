@@ -19,13 +19,13 @@ import com.example.logo.Constant.RUB_SIMBOL
 import com.example.logo.R
 import com.example.logo.bottom_sheets.ChooseSize
 import com.example.logo.bottom_sheets.TableSize
-import com.example.logo.data.Modification
-import com.example.logo.data.Modifications
-import com.example.logo.data.modelCart.Product
+import com.example.logo.data.post.modification.Modification
+import com.example.logo.data.post.modification.Modifications
 import com.example.logo.databinding.FragmentGoodsBinding
 import com.example.logo.ui.card.CartViewModel
 import com.example.logo.ui.home.HomeViewModel
 import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipDrawable
 import kotlin.properties.Delegates
 
 class GoodsFragment() : Fragment(){
@@ -33,8 +33,9 @@ class GoodsFragment() : Fragment(){
     companion object{
         const val KEY_NAME = "NAME"
         const val KEY_POSITION = "POSITION"
-        private const val QUANTITY = 1
+        const val QUANTITY = 1
 
+        var idProduct by Delegates.notNull<Int>()
         val mList : ArrayList<Modification> = arrayListOf()
         val mod : Modifications = Modifications(mList)
 
@@ -55,7 +56,6 @@ class GoodsFragment() : Fragment(){
     private val sizeList: ArrayList<String> = arrayListOf()
     private val imageList = ArrayList<SlideModel>()
 
-    private var idProduct by Delegates.notNull<Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -132,24 +132,34 @@ class GoodsFragment() : Fragment(){
                 })
 
                 chipGroupChooseColor.apply {
+                    this.isSelectionRequired = true
+                    this.isSingleSelection = true
                     this.removeAllViewsInLayout()
-                    it.colors.forEach {
-                        val chip = Chip(this.context)
 
-                        chip.text= it.colorName
+                    it.colors.forEach {
+
+                        val chip = Chip(this.context)
+                        val color = it.colorName
+
                         chip.isClickable = true
                         chip.isCheckable = true
                         chip.id = it.id.toInt()
-
-                        chip.setOnClickListener{
-                            showToast(requireContext(), "Цвет ${chip.id}${chip.text}")
+                        chip.isCheckedIconVisible = false
+                        chip.setEnsureMinTouchTargetSize(false)
+                        chip.setOnClickListener {
+                            binding.tvColorValue.text = color
                         }
 
+                        chip.setChipDrawable(ChipDrawable.createFromAttributes(
+                            context,
+                            null,
+                            0,
+                            com.google.android.material.R.style.Widget_MaterialComponents_Chip_Choice)
+                        )
+                        this.chipSpacingHorizontal = 10
+                        this.chipSpacingVertical = 10
                         this.addView(chip)
                     }
-
-                    this.isSelectionRequired = true
-                    this.isSingleSelection = true
                 }
 
                 chipGroupChooseSize.apply {
@@ -162,9 +172,7 @@ class GoodsFragment() : Fragment(){
                         chip.isClickable = true
                         chip.isCheckable = true
                         chip.id = it.id.toInt()
-                        chip.setOnClickListener{
-                            showToast(requireContext(), "Размер ${chip.id}${chip.text}")
-                        }
+
                         this.addView(chip)
 
                     }
@@ -200,9 +208,27 @@ class GoodsFragment() : Fragment(){
             bottomSheet.arguments = bundle
         }
         else{
-            mList.add(Modification(idProduct, QUANTITY))
+            buttonState()
+        }
+    }
+
+    private fun buttonState(){
+        val product = Modification(idProduct, QUANTITY)
+        if (mList.contains(product)){
+            Log.d("test", "уже есть")
+            mList.remove(product)
+            binding.buttonAddToCard.setBackgroundResource(R.color.black_2)
+            binding.buttonAddToCard.text = "В корзину"
+            binding.buttonAddToCard.setTextColor(android.graphics.Color.rgb(255,255,255))
             Log.d("test", "$mod")
-//            vm.postCart(mod)
+        }
+        else{
+            mList.add(Modification(idProduct, QUANTITY))
+            binding.buttonAddToCard.setBackgroundResource(R.drawable.btn_background)
+            binding.buttonAddToCard.text = "В корзине"
+            binding.buttonAddToCard.setTextColor(android.graphics.Color.rgb(0,0,0))
+            Log.d("test", "$mod")
+            vm.postCart(mod)
         }
     }
 

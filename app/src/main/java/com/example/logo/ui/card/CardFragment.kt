@@ -51,7 +51,7 @@ class CardFragment:Fragment() {
 
             else -> {
                 containerEmpty.visibility = View.VISIBLE
-                cardBtn.visibility = View.VISIBLE
+                cardBtn.visibility = View.GONE
                 scrollView.visibility = View.GONE
             }
         }
@@ -98,6 +98,6 @@ class CardFragment:Fragment() {
 
     private fun showInputNumber(){
         val bottomSheet = RegistrationBottomSheet()
-        bottomSheet.show(childFragmentManager, "")
+        bottomSheet.show(childFragmentManager, "Авторизуйтесь, чтобы оформить заказ",)
     }
 }
