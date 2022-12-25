@@ -1,6 +1,7 @@
 package com.example.logo.ui.goods
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -24,6 +25,11 @@ class Gallery : Fragment(){
 
     private var prevIndex by Delegates.notNull<Int>()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("test", "onCreate")
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,7 +50,7 @@ class Gallery : Fragment(){
         createPreview()
         prevIndex = position
         onClickImage(position)
-
+        Log.d("test", "${imagePaths.size}")
     }
 
     private fun createPreview() {
@@ -68,19 +74,57 @@ class Gallery : Fragment(){
     }
 
     private fun onClickImage(index: Int) {
-        val position = (index + 1).toString()
-        val size = imagePaths.size
-        val path = imagePaths[index]
+        try {
+            val position = (index + 1).toString()
+            val size = imagePaths.size
+            val path = imagePaths[index]
 
-        tvCounter.text = "$position из $size"
-        Glide.with(imageView)
-            .load(path)
-            .error(R.drawable.jesus)
-            .into(imageView)
+            tvCounter.text = "$position из $size"
+            Glide.with(imageView)
+                .load(path)
+                .error(R.drawable.jesus)
+                .into(imageView)
 
-        linearContainer.get(prevIndex).alpha = 0.6f
-        linearContainer.get(index).alpha = 1f
+            linearContainer.get(prevIndex).alpha = 0.6f
+            linearContainer.get(index).alpha = 1f
 
-        prevIndex = index
+            prevIndex = index
+        }
+        catch (e: Exception){
+            e.message
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("test", "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("test", "onResume")
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("test", "onPause")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("test", "onDestroyView")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("test", "onDestroy")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.d("test", "onDetach")
+        imagePaths.clear()
+        Log.d("test", "${imagePaths.size}")
     }
 }

@@ -1,9 +1,11 @@
 package com.example.logo.ui.home
 
 import android.graphics.Color
+import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.print.PrintAttributes.Margins
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +19,7 @@ import android.widget.LinearLayout
 import android.widget.LinearLayout.LayoutParams
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.*
@@ -32,8 +35,10 @@ import com.example.logo.ui.home.adapters.SalesAdapter
 import cz.intik.overflowindicator.SimpleSnapHelper
 import com.example.logo.Constant.print
 import com.example.logo.Container
+import com.example.logo.bottom_sheets.ChooseSize
 import com.example.logo.databinding.ContainerRvBinding
 import com.example.logo.ui.home.adapters.CategoryAdapter
+import com.google.android.material.badge.BadgeDrawable
 
 class HomeFragment : Fragment(), NewClothesAdapter.Listener{
 
@@ -72,15 +77,15 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
         snapHelper2.attachToRecyclerView(recycleViewSales)
 
 
-
         viewModel.mainPageInfo.observe(viewLifecycleOwner){
+
             recycleViewNewCollection.adapter = NewClothesAdapter(it.newProducts, this)
             viewOverflowPagerIndicator.attachToRecyclerView(recycleViewNewCollection)
 
             recycleViewSales.adapter = SalesAdapter(it.saleProducts, this)
             viewOverflowPagerIndicator2.attachToRecyclerView(recycleViewSales)
 
-
+            binding.textViewCategory.text = it.categories[0].name
             val fr = binding.fr
 
             if ( fr.isNotEmpty()) fr.removeAllViews()
@@ -88,7 +93,7 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
             val adapter = CategoryAdapter(it.saleProducts, this)
             it.categories.forEach {
 
-                if (it.parentId == "45"){
+                if (it.parentId == null){
 
                     print("categor name", it.name)
 
@@ -125,6 +130,7 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
                         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
                         setOnClickListener {
                             Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
+                            findNavController().navigate(R.id.action_homeFragment_to_categoryFragment)
                         }
                     }
                     linearLayout.addView(tv)
@@ -143,7 +149,6 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
             }
         }
 
-
         with(viewModel){
             getMainPageInfo()
 //            getProductList()
@@ -156,8 +161,11 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
         }
 
         binding.cardViewFirst.setOnClickListener{
+            val catName = binding.textViewCategory.text
 //            Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_homeFragment_to_categoryFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_categoryFragment,
+            bundleOf(KEY_NAME to catName)
+            )
         }
     }
 
@@ -168,5 +176,21 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
         )
     }
 
+    override fun showSize(slug: String) {
+        val bundle = Bundle()
+        bundle.putString("key", slug)
+
+        val bottomSheet = ChooseSize()
+        bottomSheet.show(childFragmentManager, "")
+        bottomSheet.arguments = bundle
+    }
+
     // TODO: сделать поиск, кнопки на превью с дабовлением в корзину
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("test", "onResume")
+        binding.recyclerViewNewCollection.adapter?.notifyDataSetChanged()
+    }
+
 }

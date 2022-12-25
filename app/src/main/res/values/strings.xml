@@ -36,4 +36,8 @@
     <string name="mbLike">Вам может понравиться</string>
     <string name="sale">СКИДКА</string>
     <string name="write_primerky"><u>Запишитесь на примерку</u></string>
+    <string name="order_text">Отправляем заказы курьерской службой по всей России. Согласуем с вами сроки и стоимость, чтобы вы могли выбрать оптимальный способ доставки.</string>
+    <string name="look_map"><u>Посмотреть на карте</u></string>
+    <string name="order_text2">В шоуруме вы можете расплатиться картой или наличными</string>
+    <string name="send_sms_to_number">Отправили сообщение на номер:\n</string>
 </resources>

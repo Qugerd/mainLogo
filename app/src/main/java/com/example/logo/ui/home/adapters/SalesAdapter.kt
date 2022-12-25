@@ -25,6 +25,16 @@ class SalesAdapter(private val mList: List<SaleProduct>, private val listener: N
                     mList?.get(position)?.slug
                 )
             }
+
+            addToCart.setOnClickListener {
+                listener.showSize(
+                    mList[position].slug
+                )
+                Glide.with(addToCart)
+                    .load(R.drawable.ic_cart__on)
+                    .error(R.drawable.ic_cart__on)
+                    .into(addToCart)
+            }
         }
 
         val tvName = binding.tvName
@@ -34,6 +44,7 @@ class SalesAdapter(private val mList: List<SaleProduct>, private val listener: N
         val tvLabel = binding.tvLabel
         val tvLabelSale = binding.tvLabelSale
         val imView = binding.imView
+        val addToCart = binding.addToCart
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SalesViewHolder {
