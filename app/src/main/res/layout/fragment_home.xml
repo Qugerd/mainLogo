@@ -1,64 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".ui.home.HomeFragment"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textViewLogo"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:fitsSystemWindows="true"
+        android:background="@color/white">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+
+            <TextView
+                android:id="@+id/textViewLogo2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="@string/app_name"
+                android:textSize="36dp"
+                android:gravity="center"
+                android:fontFamily="@font/futura_medium"
+                android:textColor="@color/grey"
+                app:layout_collapseMode="none"/>
 
 
-        android:text="@string/app_name"
-        android:textSize="30dp"
-        android:gravity="center"
-        android:fontFamily="@font/futura_book"
-        android:textColor="@color/black"
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-        android:background="@color/splash"/>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/seach_view_background"
-        android:iconifiedByDefault="true"
-        android:inputType="text"
-        app:layout_scrollFlags="scroll|enterAlways"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="10dp"
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewLogo"/>
+            app:cardCornerRadius="63dp"
+            app:cardElevation="10dp">
 
-    <ScrollView
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+
+                android:layout_marginStart="16dp"
+
+                android:text="Поиск"
+                android:gravity="center|start"
+                android:fontFamily="@font/montserrat_medium"
+                android:textSize="16dp"
+
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="10dp"/>
+        </androidx.cardview.widget.CardView>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/sv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="90dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchView"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewFirst"
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
 
-                android:layout_marginTop="10dp"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="16dp"
                 app:cardCornerRadius="15dp"
 
                 app:layout_constraintStart_toStartOf="parent"
@@ -83,7 +103,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="@string/category"
+
                         android:layout_marginStart="2dp"
 
                         android:textColor="@color/black"
@@ -137,22 +157,42 @@
                 android:id="@+id/textViewNew"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:fontFamily="@font/pt_root_bold"
-                android:text="@string/new_clothes"
-                android:textColor="@color/semi_black"
 
-                android:textSize="36dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="44dp"
+                android:layout_marginStart="16dp"
+
+                android:fontFamily="@font/cormorant_garamond_semibold"
+                android:text="@string/new_clothes"
+                android:textColor="@color/grey"
+
+                android:textSize="20dp"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardViewSecond" />
+
+
+            <cz.intik.overflowindicator.OverflowPagerIndicator
+                android:id="@+id/viewOverflowPagerIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:indicatorFillColor="@color/grey"
+                app:indicatorStrokeColor="@color/black"
+                app:indicatorSize="8dp"
+
+                android:layout_marginEnd="16dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/textViewNew"
+                app:layout_constraintBottom_toBottomOf="@id/textViewNew"/>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewNewCollection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="16dp"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -162,38 +202,70 @@
                 android:id="@+id/textViewSales"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:fontFamily="@font/pt_root_bold"
-                android:text="@string/sales"
-                android:textColor="@color/semi_black"
 
-                android:textSize="36dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="50dp"
+                android:layout_marginStart="16dp"
+
+                android:fontFamily="@font/cormorant_garamond_semibold"
+                android:text="@string/sales"
+                android:textColor="@color/grey"
+
+
+                android:textSize="20dp"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/recyclerViewNewCollection" />
+
+            <cz.intik.overflowindicator.OverflowPagerIndicator
+                android:id="@+id/viewOverflowPagerIndicator2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:indicatorFillColor="@color/grey"
+                app:indicatorStrokeColor="@color/black"
+                app:indicatorSize="8dp"
+
+                android:layout_marginEnd="16dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/textViewSales"
+                app:layout_constraintBottom_toBottomOf="@id/textViewSales"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewSales"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="16dp"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewSales" />
 
+
+            <LinearLayout
+                android:id="@+id/fr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="45dp"
+                android:orientation="vertical"
+                android:layout_marginStart="16dp"
+
+                app:layout_constraintTop_toBottomOf="@id/recyclerViewSales"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+            </LinearLayout>
+
+
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                app:layout_constraintTop_toBottomOf="@id/recyclerViewSales"
+                app:layout_constraintTop_toBottomOf="@id/fr"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="20dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </ScrollView>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

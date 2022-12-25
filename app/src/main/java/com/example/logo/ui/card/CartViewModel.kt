@@ -1,19 +1,94 @@
 package com.example.logo.ui.card
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.ListAdapter
-import com.example.logo.data.modelProductDetails.Data
-import com.example.logo.databinding.FragmentCardBinding
-import com.example.logo.databinding.FragmentGoodsBinding
+import androidx.lifecycle.viewModelScope
+import com.example.logo.api.RetrofitData
+import com.example.logo.api.RetrofitInstance
+import com.example.logo.bottom_sheets.RegistrationBottomSheet
+import com.example.logo.data.DataModel
+import com.example.logo.data.post.modification.Modifications
+import com.example.logo.data.modelCart.CartList
+import com.example.logo.data.modelDaData.DaData
+import com.example.logo.data.postCheckSmsCode.CheckSms
+import com.example.logo.source.DataRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CartViewModel: ViewModel() {
 
-    private var _binding: FragmentCardBinding? = null
-    private val binding get() = _binding!!
+    private val dataRepository = DataRepository(RetrofitInstance.service)
+    private val daDataRepository = DataRepository(RetrofitData.service)
 
-//    private val _cartList = MutableLiveData<>()
-//    val cartList: LiveData<> = _cartList
+    private val _cartLiveData = MutableLiveData<CartList>()
+    val cartLiveData : LiveData<CartList> = _cartLiveData
 
+    private val _daData = MutableLiveData<DaData>()
+    val daData : LiveData<DaData> = _daData
+
+    private val _token = MutableLiveData<CheckSms>()
+    val token : LiveData<CheckSms> = _token
+
+    fun postCart(mList: Modifications){
+        try {
+            viewModelScope.launch {
+                val response = withContext(Dispatchers.IO) {
+                    dataRepository.postCart(mList)
+                }
+                Log.d("test", "Cart: $response")
+                _cartLiveData.postValue(response)
+            }
+        }
+        catch (e:Exception){
+            e.printStackTrace()
+        }
+    }
+
+    fun postPhoneNumber(number: String, policy: Boolean){
+        try {
+            viewModelScope.launch {
+                withContext(Dispatchers.IO) {
+                    dataRepository.postPhoneNumber(number, policy)
+                }
+            }
+        }
+        catch (e:Exception){
+            e.printStackTrace()
+        }
+    }
+
+
+    fun postCheckSmsCode(user_code: String){
+        try {
+            viewModelScope.launch {
+                val response = withContext(Dispatchers.IO) {
+                    dataRepository.postCheckSmsCode(user_code)
+                }
+                Log.d("test", "_token: $response")
+                _token.postValue(response)
+            }
+        }
+
+        catch (e:Exception){
+            e.printStackTrace()
+        }
+    }
+
+    fun postDadata(street: DataModel){
+        try {
+            viewModelScope.launch {
+                val response = withContext(Dispatchers.IO) {
+                    daDataRepository.postAdress(street)
+                }
+                _daData.postValue(response)
+            }
+        }
+
+        catch (e:Exception){
+            e.printStackTrace()
+        }
+    }
 }

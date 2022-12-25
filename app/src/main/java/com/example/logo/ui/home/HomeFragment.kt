@@ -1,22 +1,44 @@
 package com.example.logo.ui.home
 
+import android.graphics.Color
+import android.graphics.Rect
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.print.PrintAttributes.Margins
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.TEXT_ALIGNMENT_TEXT_END
+import android.view.View.TEXT_ALIGNMENT_TEXT_START
 import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
+import android.widget.Button
+import android.widget.FrameLayout
+import android.widget.LinearLayout
+import android.widget.LinearLayout.LayoutParams
+import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.NonNull
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
+import androidx.recyclerview.widget.RecyclerView
 import com.example.logo.R
 import com.example.logo.databinding.FragmentHomeBinding
-import com.example.logo.ui.goods.GoodsFragment
 import com.example.logo.ui.goods.GoodsFragment.Companion.KEY_NAME
 import com.example.logo.ui.home.adapters.NewClothesAdapter
 import com.example.logo.ui.home.adapters.SalesAdapter
+import cz.intik.overflowindicator.SimpleSnapHelper
+import com.example.logo.Constant.print
+import com.example.logo.Container
+import com.example.logo.bottom_sheets.ChooseSize
+import com.example.logo.databinding.ContainerRvBinding
+import com.example.logo.ui.home.adapters.CategoryAdapter
+import com.google.android.material.badge.BadgeDrawable
 
 class HomeFragment : Fragment(), NewClothesAdapter.Listener{
 
@@ -41,35 +63,110 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
         recycleViewNewCollection.layoutManager = LinearLayoutManager(requireContext(),
             LinearLayoutManager.HORIZONTAL, false)
 
+        val viewOverflowPagerIndicator = binding.viewOverflowPagerIndicator
+        val snapHelper = SimpleSnapHelper(viewOverflowPagerIndicator)
+        snapHelper.attachToRecyclerView(recycleViewNewCollection)
+
+
         val recycleViewSales = binding.recyclerViewSales
         recycleViewSales.layoutManager = LinearLayoutManager(requireContext(),
             LinearLayoutManager.HORIZONTAL, false)
 
+        val viewOverflowPagerIndicator2 = binding.viewOverflowPagerIndicator2
+        val snapHelper2 = SimpleSnapHelper(viewOverflowPagerIndicator2)
+        snapHelper2.attachToRecyclerView(recycleViewSales)
 
-        viewModel.productListSalesData.observe(viewLifecycleOwner){
-            recycleViewSales.adapter = SalesAdapter(it, this)
-            Log.d("test", "Sales = ${it.size}")
-        }
 
-        viewModel.productListNewClothesData.observe(viewLifecycleOwner) {
-            with(binding){
-                // textViewCategory.text = it[0].slug
-                // TODO: Нужна картнка для категории  и добавить логику для второй категории
+        viewModel.mainPageInfo.observe(viewLifecycleOwner){
+
+            recycleViewNewCollection.adapter = NewClothesAdapter(it.newProducts, this)
+            viewOverflowPagerIndicator.attachToRecyclerView(recycleViewNewCollection)
+
+            recycleViewSales.adapter = SalesAdapter(it.saleProducts, this)
+            viewOverflowPagerIndicator2.attachToRecyclerView(recycleViewSales)
+
+            binding.textViewCategory.text = it.categories[0].name
+            val fr = binding.fr
+
+            if ( fr.isNotEmpty()) fr.removeAllViews()
+
+            val adapter = CategoryAdapter(it.saleProducts, this)
+            it.categories.forEach {
+
+                if (it.parentId == null){
+
+                    print("categor name", it.name)
+
+
+
+                    val linearLayout = LinearLayout(requireContext())
+
+                    val params = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+                    params.setMargins(0, 64, 64, 32)
+                    linearLayout.layoutParams = params
+                    linearLayout.orientation = LinearLayout.HORIZONTAL
+
+
+                    val tvSlug = TextView(requireContext()).apply {
+                        text = it.name
+                        gravity = Gravity.START
+
+                        typeface = ResourcesCompat.getFont(requireContext(), R.font.cormorant_garamond_semibold)
+                        textSize = 20f
+                        isAllCaps = true
+
+                        setTextColor(Color.rgb(81,85,98))
+                        layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+                    }
+                    linearLayout.addView(tvSlug)
+
+
+                    val tv = TextView(requireContext()).apply {
+                        typeface = ResourcesCompat.getFont(requireContext(), R.font.montserrat_medium)
+                        text = "Все"
+                        gravity = Gravity.END
+                        textSize = 16f
+                        setTextColor(Color.rgb(81,85,98))
+                        layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+                        setOnClickListener {
+                            Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
+                            findNavController().navigate(R.id.action_homeFragment_to_categoryFragment)
+                        }
+                    }
+                    linearLayout.addView(tv)
+
+
+
+                    val rv = RecyclerView(requireContext())
+                    rv.layoutManager = LinearLayoutManager(requireContext(),
+                       LinearLayoutManager.HORIZONTAL, false)
+                    rv.adapter  = adapter
+
+
+                    fr.addView(linearLayout)
+                    fr.addView(rv)
+                }
             }
-            recycleViewNewCollection.adapter = NewClothesAdapter(it, this)
-            Log.d("test", "New = ${it.size}")
         }
 
         with(viewModel){
-            getProductList()
-            getCategoryList()
-        }
-        
-        binding.cardViewFirst.setOnClickListener{
-//            Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_homeFragment_to_categoryFragment)
+            getMainPageInfo()
+//            getProductList()
+//            getCategoryList()
+//            getCategoryProductList("aut")
         }
 
+        binding.searchView.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+        }
+
+        binding.cardViewFirst.setOnClickListener{
+            val catName = binding.textViewCategory.text
+//            Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_homeFragment_to_categoryFragment,
+            bundleOf(KEY_NAME to catName)
+            )
+        }
     }
 
     override fun onItemClick(position: String?) {
@@ -79,5 +176,21 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
         )
     }
 
+    override fun showSize(slug: String) {
+        val bundle = Bundle()
+        bundle.putString("key", slug)
+
+        val bottomSheet = ChooseSize()
+        bottomSheet.show(childFragmentManager, "")
+        bottomSheet.arguments = bundle
+    }
+
     // TODO: сделать поиск, кнопки на превью с дабовлением в корзину
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("test", "onResume")
+        binding.recyclerViewNewCollection.adapter?.notifyDataSetChanged()
+    }
+
 }
