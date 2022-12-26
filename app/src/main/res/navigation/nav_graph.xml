@@ -53,6 +53,9 @@
             <action
                 android:id="@+id/action_categoryFragment_to_goodsFragment"
                 app:destination="@id/goodsFragment" />
+            <action
+                android:id="@+id/action_categoryFragment_to_homeFragment"
+                app:destination="@id/homeFragment" />
         </fragment>
         <fragment
             android:id="@+id/searchFragment"
@@ -70,7 +73,7 @@
             tools:layout="@layout/fragment_gallery" />
     </navigation>
     <navigation android:id="@+id/cartGraph"
-        app:startDestination="@id/ordering">
+        app:startDestination="@id/cardFragment">
         <fragment
             android:id="@+id/ordering"
             android:name="com.example.logo.ui.card.Ordering"
@@ -85,14 +88,6 @@
                 android:id="@+id/action_cardFragment_to_ordering"
                 app:destination="@id/ordering" />
         </fragment>
-        <dialog
-            android:id="@+id/inpuSmsBottomSheet"
-            android:name="com.example.logo.bottom_sheets.InpuSmsBottomSheet"
-            android:label="InpuSmsBottomSheet" >
-            <action
-                android:id="@+id/action_inpuSmsBottomSheet_to_ordering"
-                app:destination="@id/ordering" />
-        </dialog>
     </navigation>
 
 </navigation>

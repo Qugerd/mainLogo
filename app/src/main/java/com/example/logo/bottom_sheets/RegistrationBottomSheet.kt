@@ -73,7 +73,7 @@ class RegistrationBottomSheet: BottomSheetDialogFragment() {
     private fun showDialogSendCode(phoneNumber: String) {
 
         val policy = true
-        vm.postPhoneNumber(phoneNumber, policy)
+//        vm.postPhoneNumber(phoneNumber, policy)
 //        Log.d("test", "input.unMasked.toList().size ${input.unMasked.toList().size}")
 //        Log.d("test", "input.unMasked.toList().size ${input.unMasked}")
         val bottomSheet = InpuSmsBottomSheet()

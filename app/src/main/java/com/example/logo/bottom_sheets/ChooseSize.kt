@@ -113,7 +113,7 @@ class ChooseSize : BottomSheetDialogFragment() {
 
     private fun addToCart() {
         if (binding.radioGroup.checkedRadioButtonId >= 0){
-            mList.add(Modification(idProduct, QUANTITY))
+            mList.add(Modification(idProduct, 1, 1, QUANTITY))
             btnAdd.isClickable = false
             btnAdd.text = "В корзине"
             btnAdd.setBackgroundResource(R.drawable.btn_background)

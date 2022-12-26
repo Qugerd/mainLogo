@@ -83,7 +83,7 @@ class NewClothesAdapter(private val mList: List<NewProduct>, private val listene
 
     private fun checkInCart(addToCard: ImageView, position: Int) {
         mList[position].apply {
-            if (GoodsFragment.mList.contains(Modification(this.id.toInt(), 1))){
+            if (GoodsFragment.mList.contains(Modification(this.id.toInt(),1,1, 1))){
                 Glide.with(addToCard)
                     .load(R.drawable.ic_cart__on)
                     .error(R.drawable.ic_cart__on)

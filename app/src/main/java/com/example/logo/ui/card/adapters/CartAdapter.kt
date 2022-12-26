@@ -41,16 +41,14 @@ class CartAdapter(private val mList: List<Item>): Adapter<CartAdapter.ViewHolder
 
         with(holder){
             tvName.text = iView.product.name
-            tvBrend.text = iView.product.brand.brandName
-            tvCategory.text = iView.product.category.name
             tvPrice.text = iView.product.discountPrice
             tvOldPrice.text = iView.product.price
             tvOldPrice.apply {
                 paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 text = iView.product.price + Constant.RUB_SIMBOL
             }
-            tvColor.text = iView.product.colors[0].colorName
-            tvSize.text = iView.product.sizes[0].sizeName
+//            tvColor.text = iView.product.colors[0].colorName
+//            tvSize.text = iView.product.sizes[0].sizeName
 
             if (iView.product.images.isNotEmpty())
             {

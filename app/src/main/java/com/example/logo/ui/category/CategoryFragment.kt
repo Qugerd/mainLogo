@@ -44,8 +44,8 @@ class CategoryFragment : Fragment(), NewClothesAdapter.Listener {
 
         viewModel.getProductDetails()
 
-        val catName = arguments?.get(GoodsFragment.KEY_NAME) as String
-        tvCategory.text = catName
+        val catName = arguments?.get(GoodsFragment.KEY_NAME) ?: ""
+        tvCategory.text = catName.toString()
 
 
         val recycleV = binding.rv.apply {
@@ -62,7 +62,7 @@ class CategoryFragment : Fragment(), NewClothesAdapter.Listener {
         }
 
         binding.tvBack.setOnClickListener {
-            findNavController().popBackStack()
+            findNavController().navigate(R.id.action_categoryFragment_to_homeFragment)
         }
 
 

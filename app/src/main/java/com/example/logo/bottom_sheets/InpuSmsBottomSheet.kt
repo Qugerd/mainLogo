@@ -13,11 +13,9 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.logo.R
 import com.example.logo.bottom_sheets.RegistrationBottomSheet.Companion.phoneNumberMask
-import com.example.logo.databinding.DialogRegistrationBinding
 import com.example.logo.databinding.DialogSmsBinding
 import com.example.logo.ui.card.CartViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import java.util.prefs.Preferences
 
 const val APP = "APP"
 const val PREF_VALUE = "PREF_VALUE"
@@ -59,6 +57,11 @@ class InpuSmsBottomSheet: BottomSheetDialogFragment() {
         binding.btnBack.setOnClickListener {
             goBack()
         }
+
+        binding.btnConfirm.setOnClickListener {
+            this.dismiss()
+            findNavController().navigate(R.id.action_cardFragment_to_ordering)
+        }
     }
 
     private fun inputCode() {
@@ -68,26 +71,18 @@ class InpuSmsBottomSheet: BottomSheetDialogFragment() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
-                if (input.unMasked.toList().size == 6){
 
-                    Log.d("test", "code ${input.unMasked}")
-                    vm.postCheckSmsCode(input.unMasked)
+                if (input.unMasked.toList().size >= 4){
 
-                    vm.token.observe(viewLifecycleOwner){
-                        Log.d("test", "token $it")
-                        preferences.edit()
-                            .putString(PREF_VALUE, it.token)
-                            .apply()
-                    }
 
-                    if (!preferences.getString(APP, PREF_VALUE).isNullOrEmpty())
-                    {
-                        findNavController().navigate(R.id.action_inpuSmsBottomSheet_to_ordering)
-                    }
+                    Log.d("test", "${input.unMasked.toList().size}")
                 }
             }
 
             override fun afterTextChanged(p0: Editable?) {
+                if (input.unMasked.toList().size == 6){
+
+                }
             }
         })
     }

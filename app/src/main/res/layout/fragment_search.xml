@@ -55,31 +55,31 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/containerZaglushka"
-                android:layout_width="match_parent"
-                android:layout_height="106dp"
-                android:orientation="vertical"
-                android:layout_marginTop="300dp">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/containerZaglushka"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="106dp"-->
+<!--                android:orientation="vertical"-->
+<!--                android:layout_marginTop="300dp">-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
 
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_veshalka"/>
+<!--                    android:layout_gravity="center"-->
+<!--                    android:src="@drawable/ic_veshalka"/>-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
 
-                    android:fontFamily="@font/montserrat_medium"
+<!--                    android:fontFamily="@font/montserrat_medium"-->
 
-                    android:layout_gravity="center"
-                    android:text="Ничего не нашлось"
-                    android:textColor="#515562"
-                    android:textSize="16dp"/>
-            </LinearLayout>
+<!--                    android:layout_gravity="center"-->
+<!--                    android:text="Ничего не нашлось"-->
+<!--                    android:textColor="#515562"-->
+<!--                    android:textSize="16dp"/>-->
+<!--            </LinearLayout>-->
 
 
 
@@ -124,52 +124,52 @@
                     android:layout_height="188dp"
                     android:layout_marginTop="12dp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
 
-                    android:layout_marginTop="34dp"
+<!--                    android:layout_marginTop="34dp"-->
 
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="Категории"
-                    android:textColor="@color/black"
-                    android:textSize="18dp"/>
+<!--                    android:fontFamily="@font/montserrat_semibold"-->
+<!--                    android:text="Категории"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="18dp"/>-->
 
-                <LinearLayout
-                    android:id="@+id/itemCategory"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:orientation="horizontal"
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/itemCategory"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="48dp"-->
+<!--                    android:orientation="horizontal"-->
 
-                    android:layout_marginTop="12dp">
+<!--                    android:layout_marginTop="12dp">-->
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        app:cardCornerRadius="80dp"
-                        android:layout_gravity="start|center">
-                        <ImageView
-                            android:id="@+id/imageView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/jesus"
-                            />
-                    </androidx.cardview.widget.CardView>
+<!--                    <androidx.cardview.widget.CardView-->
+<!--                        android:layout_width="32dp"-->
+<!--                        android:layout_height="32dp"-->
+<!--                        app:cardCornerRadius="80dp"-->
+<!--                        android:layout_gravity="start|center">-->
+<!--                        <ImageView-->
+<!--                            android:id="@+id/imageView"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:src="@drawable/jesus"-->
+<!--                            />-->
+<!--                    </androidx.cardview.widget.CardView>-->
 
-                    <TextView
-                        android:id="@+id/tvName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvName"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
 
-                        android:layout_gravity="start|center"
+<!--                        android:layout_gravity="start|center"-->
 
-                        android:layout_marginStart="16dp"
+<!--                        android:layout_marginStart="16dp"-->
 
-                        android:text="Пальто"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:textSize="16dp"
-                        android:textColor="@color/black_2"/>
-                </LinearLayout>
+<!--                        android:text="Пальто"-->
+<!--                        android:fontFamily="@font/montserrat_medium"-->
+<!--                        android:textSize="16dp"-->
+<!--                        android:textColor="@color/black_2"/>-->
+<!--                </LinearLayout>-->
             </LinearLayout>
         </LinearLayout>
 

@@ -7,5 +7,7 @@ data class Color(
     @SerializedName("color_name")
     val colorName: String,
     @SerializedName("id")
-    val id: String
+    val id: String,
+    @SerializedName("hex_color")
+    val hex_color: String
 )

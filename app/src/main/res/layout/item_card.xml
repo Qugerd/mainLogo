@@ -127,6 +127,7 @@
                 android:textSize="18dp"/>
 
             <ImageView
+                android:id="@+id/btn"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
 

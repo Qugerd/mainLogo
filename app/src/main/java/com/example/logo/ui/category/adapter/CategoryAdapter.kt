@@ -81,7 +81,7 @@ class CategoryAdapter(private val data: List<DataProductList>, private val liste
 
     private fun checkInCart(btnAddToCard: ImageView, position: Int) {
         data[position].apply {
-            if (mList.contains(Modification(this.id.toInt(), 1))){
+            if (mList.contains(Modification(this.id.toInt(),1,1,1))){
                 Glide.with(btnAddToCard)
                     .load(R.drawable.ic_cart__on)
                     .error(R.drawable.ic_cart__on)

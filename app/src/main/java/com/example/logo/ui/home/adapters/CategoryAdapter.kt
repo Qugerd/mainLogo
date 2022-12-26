@@ -8,10 +8,11 @@ import com.bumptech.glide.Glide
 import com.example.logo.Constant
 import com.example.logo.R
 import com.example.logo.data.modelMainPage.SaleProduct
+import com.example.logo.data.modelProductList.DataProductList
 import com.example.logo.databinding.ItemCardBinding
 
 
-class CategoryAdapter(private val mList: List<SaleProduct>, private val listener: NewClothesAdapter.Listener)
+class CategoryAdapter(private val mList: List<DataProductList>, private val listener: NewClothesAdapter.Listener)
     : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     class CategoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -19,13 +20,18 @@ class CategoryAdapter(private val mList: List<SaleProduct>, private val listener
         private val binding = ItemCardBinding.bind(itemView)
 
 
-        fun bind(listener: NewClothesAdapter.Listener, mList: List<SaleProduct>) = with(binding){
+        fun bind(listener: NewClothesAdapter.Listener, mList: List<DataProductList>) = with(binding){
             itemView.setOnClickListener {
                 listener.onItemClick(
                     mList?.get(position)?.slug
                 )
             }
 
+            btn.setOnClickListener {
+                listener.showSize(
+                    mList[position].slug
+                )
+            }
         }
 
         var tvName = binding.tvName
@@ -58,10 +64,6 @@ class CategoryAdapter(private val mList: List<SaleProduct>, private val listener
                 .into(holder.ivNewClothes)
         }
         else holder.ivNewClothes.setImageResource(R.drawable.jesus)
-    }
-
-    interface Listener{
-        fun onItemClick(position: String?)
     }
 
     override fun getItemCount(): Int {

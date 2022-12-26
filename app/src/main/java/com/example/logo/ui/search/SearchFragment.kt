@@ -8,19 +8,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.logo.Constant.EMPTY
+import com.example.logo.Constant.deque
 import com.example.logo.R
 import com.example.logo.databinding.FragmentSearchBinding
+import com.example.logo.ui.goods.GoodsFragment.Companion.KEY_NAME
 import com.example.logo.ui.search.adapter.SearchAdapter
 import com.example.logo.ui.search.adapter.SearchHistoryAdapter
 import kotlin.properties.Delegates.notNull
 
 // TODO: сохранение сотояния поиска, возрат с фрагмента не показывается история поиска, подключить апи для категории
-class SearchFragment : Fragment(), SearchView.OnQueryTextListener {
+class SearchFragment : Fragment(), SearchView.OnQueryTextListener, SearchAdapter.Listener {
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
@@ -32,10 +35,10 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener {
     private val listView: ListView by lazy { binding.listView }
     private val containerEmpty: LinearLayout by lazy { binding.containerEmpty }
     private val containerSearch: LinearLayout by lazy { binding.containerSearch }
-    private val containerZaglushka: LinearLayout by lazy { binding.containerZaglushka }
-    private val itemCategory: LinearLayout by lazy { binding.itemCategory }
+//    private val containerZaglushka: LinearLayout by lazy { binding.containerZaglushka }
+//    private val itemCategory: LinearLayout by lazy { binding.itemCategory }
 
-    private var deque: ArrayList<String> = arrayListOf()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,13 +68,6 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener {
 
 
 
-
-
-        itemCategory.setOnClickListener {
-            findNavController().navigate(R.id.action_searchFragment_to_categoryFragment)
-        }
-
-
         binding.imBack.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -96,16 +92,16 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener {
 
         when (query){
             EMPTY -> {
-                containerEmpty.visibility = View.VISIBLE
-                containerSearch.visibility = View.GONE
-                containerZaglushka.visibility = View.GONE
+//                containerEmpty.visibility = View.VISIBLE
+//                containerSearch.visibility = View.GONE
+//                containerZaglushka.visibility = View.GONE
             }
             else -> {
                 searchQuery(query)
                 setAdapter()
-                containerZaglushka.visibility = View.GONE
-                containerEmpty.visibility = View.GONE
-                containerSearch.visibility = View.VISIBLE
+//                containerZaglushka.visibility = View.GONE
+//                containerEmpty.visibility = View.GONE
+//                containerSearch.visibility = View.VISIBLE
 
             }
         }
@@ -121,16 +117,16 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener {
 
          when (query){
             EMPTY -> {
-                containerEmpty.visibility = View.VISIBLE
-                containerSearch.visibility = View.GONE
-                containerZaglushka.visibility = View.GONE
+//                containerEmpty.visibility = View.VISIBLE
+//                containerSearch.visibility = View.GONE
+//                containerZaglushka.visibility = View.GONE
             }
             else -> {
                 searchQuery(query)
                 setAdapter()
-                containerZaglushka.visibility = View.GONE
-                containerEmpty.visibility = View.GONE
-                containerSearch.visibility = View.VISIBLE
+//                containerZaglushka.visibility = View.GONE
+//                containerEmpty.visibility = View.GONE
+//                containerSearch.visibility = View.VISIBLE
             }
         }
         return true
@@ -156,14 +152,22 @@ class SearchFragment : Fragment(), SearchView.OnQueryTextListener {
     private fun setAdapter(){
         vm.searchList.observe(viewLifecycleOwner){
             if (it.isEmpty()){
-                containerEmpty.visibility = View.GONE
-                containerSearch.visibility = View.GONE
-                containerZaglushka.visibility = View.VISIBLE
+//                containerEmpty.visibility = View.GONE
+//                containerSearch.visibility = View.GONE
+//                containerZaglushka.visibility = View.VISIBLE
                 // TODO это надо переделать
             }
             if (it.isNotEmpty()){
-                recyclerView.adapter = SearchAdapter(it)
+                recyclerView.adapter = SearchAdapter(it, this)
             }
         }
+    }
+
+    override fun onItemClick(position: String) {
+        searchView.setQuery(position, true)
+        addSearchQuery(position)
+        findNavController().navigate(R.id.action_searchFragment_to_categoryFragment,
+        bundleOf(KEY_NAME to position)
+        )
     }
 }

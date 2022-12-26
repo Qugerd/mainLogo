@@ -17,5 +17,7 @@ object Constant {
 
     var NAME : String? = null
     var EMAIL : String? = null
+
+    var deque: ArrayList<String> = arrayListOf()
 //    recyclerview.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
 }

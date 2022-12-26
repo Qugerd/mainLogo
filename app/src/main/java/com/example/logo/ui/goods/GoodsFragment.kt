@@ -213,7 +213,7 @@ class GoodsFragment() : Fragment(){
     }
 
     private fun buttonState(){
-        val product = Modification(idProduct, QUANTITY)
+        val product = Modification(idProduct, 1,1, QUANTITY)
         if (mList.contains(product)){
             Log.d("test", "уже есть")
             mList.remove(product)
@@ -223,7 +223,7 @@ class GoodsFragment() : Fragment(){
             Log.d("test", "$mod")
         }
         else{
-            mList.add(Modification(idProduct, QUANTITY))
+            mList.add(Modification(idProduct, 1, 1, QUANTITY))
             binding.buttonAddToCard.setBackgroundResource(R.drawable.btn_background)
             binding.buttonAddToCard.text = "В корзине"
             binding.buttonAddToCard.setTextColor(android.graphics.Color.rgb(0,0,0))

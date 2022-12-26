@@ -39,6 +39,9 @@ class HomeViewModel(): ViewModel(){
     private val _mainPageInfo = MutableLiveData<DataMainPage>()
     val mainPageInfo: LiveData<DataMainPage> = _mainPageInfo
 
+    private val _productListCategory = MutableLiveData<List<DataProductList>>()
+    val productListCategory: LiveData<List<DataProductList>> = _productListCategory
+
     fun getMainPageInfo(){
 
         try {
@@ -53,7 +56,23 @@ class HomeViewModel(): ViewModel(){
         catch (e:Exception){
             e.printStackTrace()
         }
+    }
 
+    fun getMainPageInfo(categoryName: String){
+
+        try {
+            viewModelScope.launch {
+                val response = withContext(Dispatchers.IO) {
+                    dataRepository.getProductList(categoryName)
+                }
+
+                _productListCategory.postValue(response.data)
+            }
+        }
+
+        catch (e:Exception){
+            e.printStackTrace()
+        }
     }
 
     fun getCategoryProductList(categoryName: String){

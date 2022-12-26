@@ -11,10 +11,17 @@ import com.example.logo.data.modelProductList.DataProductList
 import com.example.logo.databinding.FragmentSearchBinding
 import com.example.logo.databinding.ItemSearchInputBinding
 
-class SearchAdapter(private val mList: List<DataProductList>) : Adapter<SearchAdapter.SearchViewHolder>() {
+class SearchAdapter(private val mList: List<DataProductList>, private val listener: Listener) : Adapter<SearchAdapter.SearchViewHolder>() {
     class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view){
-
         private val binding = ItemSearchInputBinding.bind(itemView)
+
+        fun bind(listener: Listener, mList: List<DataProductList>) = with(binding){
+            itemView.setOnClickListener{
+                listener.onItemClick(
+                    mList.get(position).name
+                )
+            }
+        }
 
         val tvName = binding.tvName
     }
@@ -30,9 +37,15 @@ class SearchAdapter(private val mList: List<DataProductList>) : Adapter<SearchAd
 
         val itemView = mList.get(position)
         holder.tvName.text = itemView.name
+
+        holder.bind(listener, mList)
     }
 
     override fun getItemCount(): Int {
         return mList.size
+    }
+
+    interface Listener{
+        fun onItemClick(position: String)
     }
 }

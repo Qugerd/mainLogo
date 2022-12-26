@@ -1,25 +1,15 @@
 package com.example.logo.ui.home
 
 import android.graphics.Color
-import android.graphics.Rect
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.print.PrintAttributes.Margins
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.TEXT_ALIGNMENT_TEXT_END
-import android.view.View.TEXT_ALIGNMENT_TEXT_START
 import android.view.ViewGroup
-import android.view.ViewGroup.MarginLayoutParams
-import android.widget.Button
-import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.LinearLayout.LayoutParams
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.NonNull
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.*
@@ -34,11 +24,8 @@ import com.example.logo.ui.home.adapters.NewClothesAdapter
 import com.example.logo.ui.home.adapters.SalesAdapter
 import cz.intik.overflowindicator.SimpleSnapHelper
 import com.example.logo.Constant.print
-import com.example.logo.Container
 import com.example.logo.bottom_sheets.ChooseSize
-import com.example.logo.databinding.ContainerRvBinding
 import com.example.logo.ui.home.adapters.CategoryAdapter
-import com.google.android.material.badge.BadgeDrawable
 
 class HomeFragment : Fragment(), NewClothesAdapter.Listener{
 
@@ -90,7 +77,7 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
 
             if ( fr.isNotEmpty()) fr.removeAllViews()
 
-            val adapter = CategoryAdapter(it.saleProducts, this)
+
             it.categories.forEach {
 
                 if (it.parentId == null){
@@ -140,8 +127,11 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
                     val rv = RecyclerView(requireContext())
                     rv.layoutManager = LinearLayoutManager(requireContext(),
                        LinearLayoutManager.HORIZONTAL, false)
-                    rv.adapter  = adapter
 
+                    viewModel.getMainPageInfo(it.name)
+                    viewModel.productListCategory.observe(viewLifecycleOwner){
+                        rv.adapter = CategoryAdapter(it, this)
+                    }
 
                     fr.addView(linearLayout)
                     fr.addView(rv)
@@ -186,11 +176,4 @@ class HomeFragment : Fragment(), NewClothesAdapter.Listener{
     }
 
     // TODO: сделать поиск, кнопки на превью с дабовлением в корзину
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("test", "onResume")
-        binding.recyclerViewNewCollection.adapter?.notifyDataSetChanged()
-    }
-
 }
