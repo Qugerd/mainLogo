@@ -24,7 +24,7 @@ class SplashScreen:AppCompatActivity(){
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             },
-            200L
+            1500L
         )
     }
     // TODO: Загрузочный экран сделать фрагментом
